@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 22 f?vr. 2016 22:46:58 by Hibernate Tools 4.3.1 -->
+
 <hibernate-mapping>
-  <class name="fr.utbm.dvdstore.core.entity.Actor" optimistic-lock="version" schema="VIDEO" table="ACTOR">
+  <class name="lo54.projetlo54.core.entity" optimistic-lock="version" schema="lo54" table="client">
     <id name="id" type="int">
-      <column name="ID"/>
+      <column name="ID_CLIENT"/>
       <generator class="assigned"/>
     </id>
-    <property name="lastname" type="string">
-      <column length="20" name="LASTNAME" not-null="true"/>
+    <property name="lastName" type="string">
+      <column length="30" name="LASTNAME" not-null="true"/>
     </property>
-    <property name="firstname" type="string">
-      <column length="20" name="FIRSTNAME"/>
+    <property name="firstName" type="string">
+      <column length="30" name="FIRSTNAME" not-null="true"/>
     </property>
+    <property name="address" type="string">
+      <column length="100" name="ADDRESS" not-null="true"/>
+    </property>
+    <property name="phone" type="string">
+      <column length="15" name="PHONE" not-null="true"/>
+    </property>
+    <property name="email" type="string">
+      <column length="50" name="EMAIL"/>
+    </property>
+    <many-to-one name="courseSessionId" class="lo54.projetlo54.core.CourseSession"
+            column="COURSE_SESSION_ID" unique="true" not-null="true"
+            cascade="all" />
   </class>
 </hibernate-mapping>
