@@ -52,6 +52,11 @@ public class Course  implements java.io.Serializable {
         this.courseSessions = courseSessions;
     }
 
+    @Override
+    public String toString() {
+        return "Course{" + "code=" + code + ", title=" + title + ", courseSessions=" + courseSessions + '}';
+    }
+
 
 
 
