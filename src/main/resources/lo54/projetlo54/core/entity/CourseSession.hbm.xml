@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 15 mai 2016 21:15:59 by Hibernate Tools 4.3.1 -->
+<!-- Generated 15 mai 2016 21:15:59 by Hibernate Tools 4.3.1 @author Jordan -->
 <hibernate-mapping>
     <class name="lo54.projetlo54.core.entity.CourseSession" table="course_session" catalog="lo54" optimistic-lock="version">
         <id name="idCourseSession" type="java.lang.Integer">
