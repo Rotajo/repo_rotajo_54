@@ -36,10 +36,11 @@ public class CourseService {
     public void affichageTableEntiere(){
         
         CourseDao cd = new CourseDao();
+        
         l = cd.recupererTout();
         
-        for(Course cc : l){
-            cc.toString();
-        }
+        for(Course cc : l)
+            System.out.println(cc.properties());
+    
     }
 }

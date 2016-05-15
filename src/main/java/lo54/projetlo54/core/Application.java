@@ -28,17 +28,16 @@ public class Application {
         System.out.println("Classe Application : OK !");
                 
         // ajout simple d'un cours
-        co = new Course("LO54", "Java Enterprise Applications Architectures and Development Frameworks");
-        System.out.println(co.toString());
+        //co = new Course("LO54", "Java Enterprise Applications Architectures and Development Frameworks");
+        //co = new Course("LO43", "Bases fondamentales de la programmation orientée objet");
         
-     CourseDao courseDao = new CourseDao();
-     courseDao.ajouter(co);
+        //CourseDao courseDao = new CourseDao();
+        //courseDao.ajouter(co);
      
-    System.out.println("test");
-   /*     
+        
         // affichage de toute la table Course
         CourseService courseService = new CourseService();
         courseService.affichageTableEntiere();
-*/
+
     }
 } // fin de classe Application
