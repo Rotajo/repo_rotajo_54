@@ -22,7 +22,7 @@ public class LocationDao {
     }
     
     /**
-     * Ajout d'une location
+     * Ajout d'un lieu
      * @param l location
      */
     public void ajouter(Location l) {
