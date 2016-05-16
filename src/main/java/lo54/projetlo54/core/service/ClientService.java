@@ -6,32 +6,31 @@
 package lo54.projetlo54.core.service;
 
 import java.util.List;
-import lo54.projetlo54.core.entity.Course;
-import lo54.projetlo54.core.repository.CourseDao;
+import lo54.projetlo54.core.entity.Client;
+import lo54.projetlo54.core.repository.ClientDao;
 
 /**
- * Affichage de la table Course
+ * Affichage de la table Client
  * @author Jordan
  */
-public class CourseService {
+public class ClientService {
     
-    List<Course> l;
+    List<Client> l;
 
-    public CourseService() {
+    public ClientService() {
     }
 
     /**
-     * Affichage entière de la table Course
+     * Affichage entière de la table Client
      * @author Jordan
      */
     public void affichageTableEntiere(){
         
-        CourseDao cd = new CourseDao();
+        ClientDao cd = new ClientDao();
         
         l = cd.recupererTout();
-        
-        for(Course cc : l)
-            System.out.println(cc.toString());
-    
+           
+        for(Client cc : l)
+            System.out.println(cc.toString());   
     }
 }

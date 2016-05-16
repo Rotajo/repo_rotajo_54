@@ -12,7 +12,6 @@ import java.util.Set;
  */
 public class CourseSession  implements java.io.Serializable {
 
-
      private Integer idCourseSession;
      private Course course;
      private Location location;
@@ -77,6 +76,11 @@ public class CourseSession  implements java.io.Serializable {
     
     public void setClients(Set clients) {
         this.clients = clients;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseSession{" + "idCourseSession=" + idCourseSession + ", course=" + course.getCode() + ", location=" + location.getIdLocation() + ", startDate=" + startDate + ", endDate=" + endDate + '}';
     }
 
 

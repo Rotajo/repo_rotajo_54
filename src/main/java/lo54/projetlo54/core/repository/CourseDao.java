@@ -52,6 +52,7 @@ public class CourseDao {
     /**
      * Récupère toute la table Course
      * @return la liste de récupération de toute la table
+     * @author Jordan
      */
     public List<Course> recupererTout() {
         
@@ -59,8 +60,7 @@ public class CourseDao {
         
         // connexion à la base de données
         Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        
+               
         try {
             session.beginTransaction();         // début de transaction
             

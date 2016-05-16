@@ -6,26 +6,26 @@
 package lo54.projetlo54.core.repository;
 
 import java.util.List;
-import lo54.projetlo54.core.entity.Client;
+import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- * Manipulation de la table Client
+ * Manipulation de la table CourseSession
  * @author Jordan
  */
-public class ClientDao {
+public class CourseSessionDao {
     
-    public ClientDao() {
+    public CourseSessionDao() {
     }
     
     /**
-     * Ajout d'un client
-     * @param c client
+     * Ajout d'une location
+     * @param c session de cours
      */
-    public void ajouter(Client c) {
+    public void ajouter(CourseSession c) {
         // connexion à la base de données
         Session session = HibernateUtil.getSessionFactory().openSession();
         
@@ -49,13 +49,13 @@ public class ClientDao {
     }
     
     /**
-     * Récupère toute la table Client
+     * Récupère toute la table CourseSession
      * @return la liste de récupération de toute la table
      * @author Jordan
      */
-    public List<Client> recupererTout() {
+    public List<CourseSession> recupererTout() {
         
-        List<Client> l = null;     // liste de récupération
+        List<CourseSession> l = null;     // liste de récupération
         
         // connexion à la base de données
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -63,8 +63,8 @@ public class ClientDao {
         try {
             session.beginTransaction();         // début de transaction
             
-            // récupère toute la table Client
-            Query query = session.createQuery("from Client");
+            // récupère toute la table CourseSession
+            Query query = session.createQuery("from CourseSession");
             l = query.list();
                         
         } catch (HibernateException he) {
@@ -83,4 +83,4 @@ public class ClientDao {
         return l;
     }
     
-} // fin de classe ClientDao
+} // fin de classe CourseSessionDao

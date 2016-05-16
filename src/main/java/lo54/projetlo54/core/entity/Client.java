@@ -87,8 +87,10 @@ public class Client  implements java.io.Serializable {
         this.email = email;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Client{" + "idClient=" + idClient + ", lastname=" + lastname + ", firstname=" + firstname + ", address=" + address + ", phone=" + phone + ", email=" + email + ", courseSession=" + courseSession.getIdCourseSession() + '}';
+    }
 
 }
 

@@ -9,8 +9,10 @@ import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.entity.Location;
-import lo54.projetlo54.core.repository.CourseDao;
+import lo54.projetlo54.core.service.ClientService;
 import lo54.projetlo54.core.service.CourseService;
+import lo54.projetlo54.core.service.CourseSessionService;
+import lo54.projetlo54.core.service.LocationService;
 
 /**
  * Actions sur la base de données (tests)
@@ -25,7 +27,7 @@ public class Application {
         CourseSession cs;   // session de cours
         Location lo;        // localisation
         
-        System.out.println("Classe Application : OK !");
+        System.out.println("Classe Application : OK !\n");
                 
         // ajout simple d'un cours
         //co = new Course("LO54", "Java Enterprise Applications Architectures and Development Frameworks");
@@ -35,9 +37,26 @@ public class Application {
         //courseDao.ajouter(co);
      
         
+        // affichage de toute la table Location
+        LocationService locationService = new LocationService();
+        locationService.affichageTableEntiere();
+        
+        System.out.println();        
+        
         // affichage de toute la table Course
         CourseService courseService = new CourseService();
         courseService.affichageTableEntiere();
+        System.out.println();
+        
+        // affichage de toute la table CourseSession
+        CourseSessionService courseSessionService = new CourseSessionService();
+        courseSessionService.affichageTableEntiere();
+        
+        System.out.println();
+        
+        // affichage de toute la table Client
+        ClientService clientService = new ClientService();
+        clientService.affichageTableEntiere();
 
     }
 } // fin de classe Application
