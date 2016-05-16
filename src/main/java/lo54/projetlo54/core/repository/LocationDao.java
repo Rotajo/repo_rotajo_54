@@ -13,7 +13,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- * Manipulation de la table Location
+ * Manipulation de la table Localisation
  * @author Jordan
  */
 public class LocationDao {

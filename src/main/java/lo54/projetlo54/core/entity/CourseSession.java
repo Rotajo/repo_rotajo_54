@@ -21,7 +21,6 @@ public class CourseSession  implements java.io.Serializable {
 
     public CourseSession() {
     }
-
 	
     public CourseSession(Date startDate, Date endDate) {
         this.startDate = startDate;

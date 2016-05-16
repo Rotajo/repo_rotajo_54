@@ -18,7 +18,6 @@ public class Course  implements java.io.Serializable {
 
     public Course() {
     }
-
 	
     public Course(String code, String title) {
         this.code = code;

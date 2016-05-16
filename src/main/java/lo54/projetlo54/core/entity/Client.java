@@ -20,7 +20,6 @@ public class Client  implements java.io.Serializable {
 
     public Client() {
     }
-
 	
     public Client(String lastname, String firstname, String address, String phone) {
         this.lastname = lastname;

@@ -9,6 +9,7 @@ import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.entity.Location;
+import lo54.projetlo54.core.repository.LocationDao;
 import lo54.projetlo54.core.service.ClientService;
 import lo54.projetlo54.core.service.CourseService;
 import lo54.projetlo54.core.service.CourseSessionService;
@@ -30,17 +31,20 @@ public class Application {
         System.out.println("Classe Application : OK !\n");
                 
         // ajout simple d'un cours
-        //co = new Course("LO54", "Java Enterprise Applications Architectures and Development Frameworks");
-        //co = new Course("LO43", "Bases fondamentales de la programmation orientée objet");
+        /*co = new Course("LO54", "Java Enterprise Applications Architectures and Development Frameworks");
+        CourseDao courseDao = new CourseDao();
+        courseDao.ajouter(co);*/
         
-        //CourseDao courseDao = new CourseDao();
-        //courseDao.ajouter(co);
+        
+        // ajout simple d'une localisation
+        lo = new Location("Troyes");
+        LocationDao locationDao = new LocationDao();
+        locationDao.ajouter(lo);
+                
      
-        
         // affichage de toute la table Location
         LocationService locationService = new LocationService();
-        locationService.affichageTableEntiere();
-        
+        locationService.affichageTableEntiere();        
         System.out.println();        
         
         // affichage de toute la table Course
@@ -50,13 +54,13 @@ public class Application {
         
         // affichage de toute la table CourseSession
         CourseSessionService courseSessionService = new CourseSessionService();
-        courseSessionService.affichageTableEntiere();
-        
+        courseSessionService.affichageTableEntiere();        
         System.out.println();
         
         // affichage de toute la table Client
         ClientService clientService = new ClientService();
-        clientService.affichageTableEntiere();
+        clientService.affichageTableEntiere();   
+        System.out.println();
 
     }
 } // fin de classe Application
