@@ -37,18 +37,21 @@ public class Application {
         
         
         // ajout simple d'une localisation
-        lo = new Location("Troyes");
+ /*       lo = new Location("Troyes");
         LocationDao locationDao = new LocationDao();
         locationDao.ajouter(lo);
-                
+  */              
      
         // affichage de toute la table Location
         LocationService locationService = new LocationService();
         locationService.affichageTableEntiere();        
-        System.out.println();        
+        System.out.println("\n");        
+        
+        LocationDao ld = new LocationDao();
+        System.out.println("Nom de la ville de code 1 = " + ld.nomVille(1));
         
         // affichage de toute la table Course
-        CourseService courseService = new CourseService();
+/*        CourseService courseService = new CourseService();
         courseService.affichageTableEntiere();
         System.out.println();
         
@@ -61,6 +64,6 @@ public class Application {
         ClientService clientService = new ClientService();
         clientService.affichageTableEntiere();   
         System.out.println();
-
+*/
     }
 } // fin de classe Application

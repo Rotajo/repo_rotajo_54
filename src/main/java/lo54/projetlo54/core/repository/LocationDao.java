@@ -83,4 +83,36 @@ public class LocationDao {
         return l;
     }
     
+    public String nomVille(int code)
+    {
+        Location l = null;
+        
+        // connexion à la base de données
+        Session session = HibernateUtil.getSessionFactory().openSession();
+               
+        try {
+            session.beginTransaction();         // début de transaction
+            
+            // récupère la ligne souhaitée de la table Location
+            Query query = session.createQuery("from Location where idLocation = :id");
+            query.setParameter("id", code);
+            l = (Location) query.uniqueResult();
+            
+                        
+        } catch (HibernateException he) {
+            he.printStackTrace();
+            if(session.getTransaction() != null) { 
+                try {
+                    session.getTransaction().rollback();	
+                }catch(HibernateException he2) {he2.printStackTrace(); }
+            }
+            
+        } finally {
+            if(session != null) 
+                session.close();
+        }
+        
+        return l.getCity();
+    }
+    
 } // fin de classe LocationDao
