@@ -33,6 +33,12 @@ public class CourseSession  implements java.io.Serializable {
        this.endDate = endDate;
        this.clients = clients;
     }
+    public CourseSession(Course course, Location location, Date startDate, Date endDate) {
+       this.course = course;
+       this.location = location;
+       this.startDate = startDate;
+       this.endDate = endDate;
+    }
    
     public Integer getIdCourseSession() {
         return this.idCourseSession;

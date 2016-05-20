@@ -83,4 +83,41 @@ public class CourseSessionDao {
         return l;
     }
     
+    /**
+     * Affichage d'un code UV
+     * @param idSession ID de la table CourseSession
+     * @return le code associé
+     */
+    public String codeUV(int idSession)
+    {
+        CourseSession cs = null;
+        
+        // connexion à la base de données
+        Session session = HibernateUtil.getSessionFactory().openSession();
+               
+        try {
+            session.beginTransaction();         // début de transaction
+            
+            // récupère la ligne souhaitée de la table Location
+            Query query = session.createQuery("from CourseSession where idCourseSession = :id");
+            query.setParameter("id", idSession);
+            cs = (CourseSession) query.uniqueResult();
+            
+                        
+        } catch (HibernateException he) {
+            he.printStackTrace();
+            if(session.getTransaction() != null) { 
+                try {
+                    session.getTransaction().rollback();	
+                }catch(HibernateException he2) {he2.printStackTrace(); }
+            }
+            
+        } finally {
+            if(session != null) 
+                session.close();
+        }
+        
+        return cs.getCourse().getCode();
+    }
+    
 } // fin de classe CourseSessionDao

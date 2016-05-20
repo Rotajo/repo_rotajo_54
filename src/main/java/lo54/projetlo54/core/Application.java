@@ -5,13 +5,22 @@
  */
 package lo54.projetlo54.core;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.entity.Location;
+<<<<<<< HEAD
 import lo54.projetlo54.core.repository.FiltresDao;
 import lo54.projetlo54.core.repository.LocationDao;
 import lo54.projetlo54.core.service.LocationService;
+=======
+import lo54.projetlo54.core.repository.CourseSessionDao;
+import lo54.projetlo54.core.service.ClientService;
+>>>>>>> origin/master
 
 /**
  * Actions sur la base de données (tests)
@@ -19,7 +28,7 @@ import lo54.projetlo54.core.service.LocationService;
  */
 public class Application {
         
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
        
         Client cl;          // client
         Course co;          // cours
@@ -39,20 +48,38 @@ public class Application {
         LocationDao locationDao = new LocationDao();
         locationDao.ajouter(lo);
   */              
-     
+        // ajout simple d'une session de coursDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        
+        // format de date : AAAA-1900 et MM-1
+ /*       Date sqlDate1 = new Date(2016-1900, 01-1, 01);
+        Date sqlDate2 = new Date(2016-1900, 12-1, 31);
+        
+        Course ccc = new Course();      ccc.setCode("SM57");
+        Location lll = new Location();  lll.setIdLocation(1);
+        
+        cs = new CourseSession(ccc, lll, sqlDate1, sqlDate2);
+        CourseSessionDao csd = new CourseSessionDao();
+        csd.ajouter(cs);
+        
+        System.out.println("\ndone !");
+*/        
         // affichage de toute la table Location
-        LocationService locationService = new LocationService();
+ /*       LocationService locationService = new LocationService();
         locationService.affichageTableEntiere();        
         System.out.println("\n");        
         
         LocationDao ld = new LocationDao();
         System.out.println("Nom de la ville de code 1 = " + ld.nomVille(1));
+<<<<<<< HEAD
         
         FiltresDao fd = new FiltresDao();
         for (CourseSession cc : fd.filtreDate("2015-11-01")){
             System.out.println(cc.getIdCourseSession());
         }
         
+=======
+ */       
+>>>>>>> origin/master
         // affichage de toute la table Course
 /*        CourseService courseService = new CourseService();
         courseService.affichageTableEntiere();
@@ -65,8 +92,7 @@ public class Application {
         
         // affichage de toute la table Client
         ClientService clientService = new ClientService();
-        clientService.affichageTableEntiere();   
-        System.out.println();
-*/
+        clientService.affichageTableEntiere();
+ */
     }
 } // fin de classe Application

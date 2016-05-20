@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
@@ -43,6 +44,8 @@ public class SessionServlet extends HttpServlet {
         
         try (PrintWriter out = response.getWriter()) {
             
+            HttpSession session = request.getSession();
+                        
             // Récupération des cours
             CourseDao cd = new CourseDao();
             List<Course> listCourse = cd.recupererTout();
@@ -71,12 +74,12 @@ public class SessionServlet extends HttpServlet {
             // ================================================================= 
             // =================================================================
             // affichage de la table COURSE_SESSION
-            out.println("<hr><h3><u><i>Session de cours :</i></u></h3>");
+            out.println("<h3><u><i>Session de cours :</i></u></h3>");
             out.print("<table border=1>");
             out.print("<tr>");
             out.print("<th>ID session</th>");
             out.print("<th>Code UV</th>");
-            out.print("<th>ID Lieu</th>");
+            out.print("<th>Ville</th>");
             out.print("<th>Date Début</th>");
             out.print("<th>Date Fin</th>");
             out.print("</tr>");
@@ -116,6 +119,25 @@ public class SessionServlet extends HttpServlet {
             }
             out.print("</table><br>");   
     */
+            
+            // =================================================================
+            // affichage des données rentrées dans le formulaire            
+            out.println("<h2>Nom de famille : "+request.getParameter("firstname")+"</h2>");
+            out.println("<h2>Prénom : "+request.getParameter("lastname")+"</h2>");
+            out.println("<h2>Adresse : "+request.getParameter("address")+"</h2>");
+            out.println("<h2>Numéro : "+request.getParameter("phone")+"</h2>");
+            out.println("<h2>Email : "+request.getParameter("email")+"</h2>"); 
+            
+            // ajout de l'étudiant dans la table Client (EN BRUTE : ID de session = 6)
+            CourseSession cs = new CourseSession();     cs.setIdCourseSession(6);
+            Client client = new Client(cs, 
+                                        request.getParameter("lastname"),
+                                        request.getParameter("firstname"),
+                                        request.getParameter("address"),
+                                        request.getParameter("phone"), 
+                                        request.getParameter("email") );
+            cld.ajouter(client);
+            
             // =================================================================
             // pieds de page HTML
             out.println("</center>");

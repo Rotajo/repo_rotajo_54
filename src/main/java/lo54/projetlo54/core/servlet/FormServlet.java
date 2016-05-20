@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Formulaire d'inscription à une session de cours
@@ -41,10 +42,10 @@ public class FormServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<center>");
-            out.println("<br><h1><u>S'inscrire à une UV :</u></h1><br><hr>");  
+            out.println("<br><h1><u>S'inscrire à une UV :</u></h1><br><hr><br>");  
             // =================================================================
             // Formulaire d'inscription à une session de cours            
-            out.println("<form method='GET' action='../ProjetLO54/session'>");
+            out.println("<form method='POST' action='../ProjetLO54/session'>");
             out.println("<p><label>Nom de famille</label> : <input type='text' name='lastname'/></p>");
             out.println("<p><label>Prénom</label> : <input type='text' name='firstname'/></p>");
             out.println("<p><label>Adresse</label> : <input type='text' name='address'/></p>");
