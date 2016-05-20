@@ -8,6 +8,7 @@ package lo54.projetlo54.core.service;
 import java.util.List;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.repository.CourseDao;
+import lo54.projetlo54.core.repository.FiltresDao;
 
 /**
  * Affichage de la table Course
@@ -33,5 +34,15 @@ public class CourseService {
         for(Course cc : l)
             System.out.println(cc.toString());
     
+    }
+    
+    public void affichageTableEntiere(String param){
+        FiltresDao fd = new FiltresDao();
+        
+        l = fd.filtreTitre(param);
+        
+        for(Course cc: l){
+            System.out.println(cc.toString());
+        }
     }
 }

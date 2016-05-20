@@ -9,10 +9,8 @@ import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.entity.Location;
+import lo54.projetlo54.core.repository.FiltresDao;
 import lo54.projetlo54.core.repository.LocationDao;
-import lo54.projetlo54.core.service.ClientService;
-import lo54.projetlo54.core.service.CourseService;
-import lo54.projetlo54.core.service.CourseSessionService;
 import lo54.projetlo54.core.service.LocationService;
 
 /**
@@ -49,6 +47,11 @@ public class Application {
         
         LocationDao ld = new LocationDao();
         System.out.println("Nom de la ville de code 1 = " + ld.nomVille(1));
+        
+        FiltresDao fd = new FiltresDao();
+        for (CourseSession cc : fd.filtreDate("2015-11-01")){
+            System.out.println(cc.getIdCourseSession());
+        }
         
         // affichage de toute la table Course
 /*        CourseService courseService = new CourseService();
