@@ -22,10 +22,10 @@ import lo54.projetlo54.core.repository.CourseSessionDao;
 import lo54.projetlo54.core.repository.LocationDao;
 
 /**
- * Affichage de toutes les tables de la base de données
+ * Affichage sessions de cours et des étudiants inscrits
  * @author Jordan
  */
-public class HomeServlet extends HttpServlet {
+public class SessionServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -68,36 +68,7 @@ public class HomeServlet extends HttpServlet {
             out.println("<body>");
             out.println("<center>");
             out.println("<br><h1><u>Affichage global</u></h1><br><hr>");  
-            // =================================================================
-            // affichage de la table COURSE
-            out.println("<h3><u><i>Cours disponibles :</i></u></h3>");
-            out.print("<table border=1>");
-            out.print("<tr>");
-            out.print("<th>Code UV</th>");
-            out.print("<th>Titre</th>");
-            out.print("</tr>");
-            for(Course c : listCourse){
-                out.print("<tr>");
-                out.print("<td>"+c.getCode()+"</td>");
-                out.print("<td>"+c.getTitle()+"</td>");
-                out.print("</tr>");
-            }
-            out.print("</table><br>");            
-            // =================================================================
-            // affichage de la table LOCATION
-            out.println("<hr><h3><u><i>Lieux de cours :</i></u></h3>");
-            out.print("<table border=1>");
-            out.print("<tr>");
-            out.print("<th>ID Lieu</th>");
-            out.print("<th>Ville</th>");
-            out.print("</tr>");
-            for(Location l : listLocation){
-                out.print("<tr>");
-                out.print("<td>"+l.getIdLocation()+"</td>");
-                out.print("<td>"+l.getCity()+"</td>");
-                out.print("</tr>");
-            }
-            out.print("</table><br>");   
+            // ================================================================= 
             // =================================================================
             // affichage de la table COURSE_SESSION
             out.println("<hr><h3><u><i>Session de cours :</i></u></h3>");
@@ -113,7 +84,7 @@ public class HomeServlet extends HttpServlet {
                 out.print("<tr>");
                 out.print("<td>"+cs.getIdCourseSession()+"</td>");
                 out.print("<td>"+cs.getCourse().getCode()+"</td>");
-                out.print("<td>"+cs.getLocation().getIdLocation()+"</td>");
+                out.print("<td>"+ld.nomVille(cs.getLocation().getIdLocation())+"</td>");
                 out.print("<td>"+cs.getStartDate()+"</td>");
                 out.print("<td>"+cs.getEndDate()+"</td>");
                 out.print("</tr>");
@@ -121,7 +92,7 @@ public class HomeServlet extends HttpServlet {
             out.print("</table><br>"); 
             // =================================================================
             // affichage de la table CLIENT
-            out.println("<hr><h3><u><i>Etudiants inscrits :</i></u></h3>");
+ /*           out.println("<hr><h3><u><i>Etudiants inscrits :</i></u></h3>");
             out.print("<table border=1>");
             out.print("<tr>");
             out.print("<th>ID Etudiant</th>");
@@ -144,6 +115,7 @@ public class HomeServlet extends HttpServlet {
                 out.print("</tr>");
             }
             out.print("</table><br>");   
+    */
             // =================================================================
             // pieds de page HTML
             out.println("</center>");
