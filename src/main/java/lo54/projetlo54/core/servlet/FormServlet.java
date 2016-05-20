@@ -41,7 +41,7 @@ public class FormServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<center>");
-            out.println("<br><h1><u>S'inscrire à une UV :</u></h1><br><hr>");  
+            out.println("<br><h1><u>S'inscrire à une UV :</u></h1><br><hr><br>");  
             // =================================================================
             // Formulaire d'inscription à une session de cours            
             out.println("<form method='GET' action='../ProjetLO54/session'>");

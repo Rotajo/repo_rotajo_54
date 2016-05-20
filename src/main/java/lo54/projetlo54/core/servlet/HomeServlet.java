@@ -105,7 +105,7 @@ public class HomeServlet extends HttpServlet {
             out.print("<tr>");
             out.print("<th>ID session</th>");
             out.print("<th>Code UV</th>");
-            out.print("<th>ID Lieu</th>");
+            out.print("<th>Ville</th>");
             out.print("<th>Date Début</th>");
             out.print("<th>Date Fin</th>");
             out.print("</tr>");
@@ -113,7 +113,7 @@ public class HomeServlet extends HttpServlet {
                 out.print("<tr>");
                 out.print("<td>"+cs.getIdCourseSession()+"</td>");
                 out.print("<td>"+cs.getCourse().getCode()+"</td>");
-                out.print("<td>"+cs.getLocation().getIdLocation()+"</td>");
+                out.print("<td>"+ld.nomVille(cs.getLocation().getIdLocation())+"</td>");
                 out.print("<td>"+cs.getStartDate()+"</td>");
                 out.print("<td>"+cs.getEndDate()+"</td>");
                 out.print("</tr>");
@@ -130,7 +130,7 @@ public class HomeServlet extends HttpServlet {
             out.print("<th>Adresse</th>");
             out.print("<th>Numéro de téléphone</th>");
             out.print("<th>Email</th>");
-            out.print("<th>ID session</th>");
+            out.print("<th>Code UV</th>");
             out.print("</tr>");
             for(Client cl : listClient){
                 out.print("<tr>");
@@ -140,7 +140,7 @@ public class HomeServlet extends HttpServlet {
                 out.print("<td>"+cl.getAddress()+"</td>");
                 out.print("<td>"+cl.getPhone()+"</td>");
                 out.print("<td>"+cl.getEmail()+"</td>");
-                out.print("<td>"+cl.getCourseSession().getIdCourseSession()+"</td>");
+                out.print("<td>"+csd.codeUV(cl.getCourseSession().getIdCourseSession())+"</td>");
                 out.print("</tr>");
             }
             out.print("</table><br>");   

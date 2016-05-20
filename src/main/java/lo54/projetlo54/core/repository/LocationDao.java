@@ -83,6 +83,12 @@ public class LocationDao {
         return l;
     }
     
+    /**
+     * Affichage du nom d'une ville
+     * @param code ID de la table Location
+     * @return le nom de la ville associée
+     * @author Jordan
+     */
     public String nomVille(int code)
     {
         Location l = null;

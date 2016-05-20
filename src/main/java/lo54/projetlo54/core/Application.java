@@ -9,6 +9,7 @@ import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.entity.Location;
+import lo54.projetlo54.core.repository.CourseSessionDao;
 import lo54.projetlo54.core.repository.LocationDao;
 import lo54.projetlo54.core.service.ClientService;
 import lo54.projetlo54.core.service.CourseService;
@@ -43,13 +44,13 @@ public class Application {
   */              
      
         // affichage de toute la table Location
-        LocationService locationService = new LocationService();
+ /*       LocationService locationService = new LocationService();
         locationService.affichageTableEntiere();        
         System.out.println("\n");        
         
         LocationDao ld = new LocationDao();
         System.out.println("Nom de la ville de code 1 = " + ld.nomVille(1));
-        
+ */       
         // affichage de toute la table Course
 /*        CourseService courseService = new CourseService();
         courseService.affichageTableEntiere();
@@ -59,11 +60,12 @@ public class Application {
         CourseSessionService courseSessionService = new CourseSessionService();
         courseSessionService.affichageTableEntiere();        
         System.out.println();
-        
+ */       
         // affichage de toute la table Client
         ClientService clientService = new ClientService();
         clientService.affichageTableEntiere();   
-        System.out.println();
-*/
+        CourseSessionDao csd = new CourseSessionDao();
+        System.out.println("\nCodeUV de la session 1 = " + csd.codeUV(1));
+
     }
 } // fin de classe Application

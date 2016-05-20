@@ -71,12 +71,12 @@ public class SessionServlet extends HttpServlet {
             // ================================================================= 
             // =================================================================
             // affichage de la table COURSE_SESSION
-            out.println("<hr><h3><u><i>Session de cours :</i></u></h3>");
+            out.println("<h3><u><i>Session de cours :</i></u></h3>");
             out.print("<table border=1>");
             out.print("<tr>");
             out.print("<th>ID session</th>");
             out.print("<th>Code UV</th>");
-            out.print("<th>ID Lieu</th>");
+            out.print("<th>Ville</th>");
             out.print("<th>Date Début</th>");
             out.print("<th>Date Fin</th>");
             out.print("</tr>");
