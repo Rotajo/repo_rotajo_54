@@ -88,6 +88,7 @@ public class SessionServlet extends HttpServlet {
             // SI les données de lastname, firstname, address & phone sont rentrées et correctes
             
             // vérificactions
+            // Si le formulaire est rempli incorrectement
             if(request.getParameter("lastname").isEmpty() |
                request.getParameter("firstname").isEmpty() |
                request.getParameter("address").isEmpty() |
@@ -97,9 +98,10 @@ public class SessionServlet extends HttpServlet {
              //   .forward( request, response );
                 
                 out.println("<h2><font color='red'>Le formulaire n'est pas correctement rempli !</font></h2>");
-                out.println("<h3><a href='../ProjetLO54/form'>Retour au formulaire</a></h3>");
+                out.println("<hr><h3><a href='../ProjetLO54/form'>Retour au formulaire</a></h3>");
                 
             }
+            // si le formulaire est rempli correctement
             else {
                 CourseSession cs = new CourseSession();     
                 cs.setIdCourseSession(idSession);
@@ -110,58 +112,58 @@ public class SessionServlet extends HttpServlet {
                                             request.getParameter("phone"), 
                                             request.getParameter("email") );
                 cld.ajouter(client);
-            }
             
-            // ================================================================= 
-            // affichage de la session de cours choisie
-            out.println("<hr><h3><u><i>Vous avez choisi la session :</i></u></h3>");
-            out.print("<table border=1>");
-            out.print("<tr>");
-            out.print("<th>ID session</th>");
-            out.print("<th>Code UV</th>");
-            out.print("<th>Titre</th>");
-            out.print("<th>Ville</th>");
-            out.print("<th>Date Début</th>");
-            out.print("<th>Date Fin</th>");
-            out.print("</tr>");
-            CourseSession cs = csd.getSession(idSession);
-            Course cc = cd.getCourse(cs.getCourse().getCode());
+            
+                // ================================================================= 
+                // affichage de la session de cours choisie
+                out.println("<hr><h3><u><i>Vous avez choisi la session :</i></u></h3>");
+                out.print("<table border=1>");
                 out.print("<tr>");
-                out.print("<td>"+cs.getIdCourseSession()+"</td>");
-                out.print("<td>"+cs.getCourse().getCode()+"</td>");
-                out.print("<td>"+cc.getTitle()+"</td>");
-                out.print("<td>"+ld.nomVille(cs.getLocation().getIdLocation())+"</td>");
-                out.print("<td>"+cs.getStartDate()+"</td>");
-                out.print("<td>"+cs.getEndDate()+"</td>");
+                out.print("<th>ID session</th>");
+                out.print("<th>Code UV</th>");
+                out.print("<th>Titre</th>");
+                out.print("<th>Ville</th>");
+                out.print("<th>Date Début</th>");
+                out.print("<th>Date Fin</th>");
                 out.print("</tr>");
-            
-            out.print("</table><br>"); 
-            
-            // =================================================================
-            // affichage des étudiants incrits à cette session
-            out.println("<hr><h3><u><i>Les étudiants inscrits :</i></u></h3>");
-            out.print("<table border=1>");
-            out.print("<tr>");
-            out.print("<th>ID Etudiant</th>");
-            out.print("<th>Nom de famille</th>");
-            out.print("<th>Prénom</th>");
-            out.print("<th>Adresse</th>");
-            out.print("<th>Numéro de téléphone</th>");
-            out.print("<th>Email</th>");
-            out.print("</tr>");
-            List<Client> listClient = cld.getClientsForSession(idSession);
-            for(Client cl : listClient){
+                cs = csd.getSession(idSession);
+                Course cc = cd.getCourse(cs.getCourse().getCode());
+                    out.print("<tr>");
+                    out.print("<td>"+cs.getIdCourseSession()+"</td>");
+                    out.print("<td>"+cs.getCourse().getCode()+"</td>");
+                    out.print("<td>"+cc.getTitle()+"</td>");
+                    out.print("<td>"+ld.nomVille(cs.getLocation().getIdLocation())+"</td>");
+                    out.print("<td>"+cs.getStartDate()+"</td>");
+                    out.print("<td>"+cs.getEndDate()+"</td>");
+                    out.print("</tr>");
+
+                out.print("</table><br>"); 
+
+                // =================================================================
+                // affichage des étudiants incrits à cette session
+                out.println("<hr><h3><u><i>Les étudiants inscrits :</i></u></h3>");
+                out.print("<table border=1>");
                 out.print("<tr>");
-                out.print("<td>"+cl.getIdClient()+"</td>");
-                out.print("<td>"+cl.getLastname()+"</td>");
-                out.print("<td>"+cl.getFirstname()+"</td>");
-                out.print("<td>"+cl.getAddress()+"</td>");
-                out.print("<td>"+cl.getPhone()+"</td>");
-                out.print("<td>"+cl.getEmail()+"</td>");
+                out.print("<th>ID Etudiant</th>");
+                out.print("<th>Nom de famille</th>");
+                out.print("<th>Prénom</th>");
+                out.print("<th>Adresse</th>");
+                out.print("<th>Numéro de téléphone</th>");
+                out.print("<th>Email</th>");
                 out.print("</tr>");
+                List<Client> listClient = cld.getClientsForSession(idSession);
+                for(Client cl : listClient){
+                    out.print("<tr>");
+                    out.print("<td>"+cl.getIdClient()+"</td>");
+                    out.print("<td>"+cl.getLastname()+"</td>");
+                    out.print("<td>"+cl.getFirstname()+"</td>");
+                    out.print("<td>"+cl.getAddress()+"</td>");
+                    out.print("<td>"+cl.getPhone()+"</td>");
+                    out.print("<td>"+cl.getEmail()+"</td>");
+                    out.print("</tr>");
+                }
+                out.print("</table><br>");   
             }
-            out.print("</table><br>");   
-            
             // =================================================================
             // pieds de page HTML
             out.println("</center>");
