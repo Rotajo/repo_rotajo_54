@@ -13,15 +13,11 @@ import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.entity.Location;
-<<<<<<< HEAD
 import lo54.projetlo54.core.repository.FiltresDao;
 import lo54.projetlo54.core.repository.LocationDao;
 import lo54.projetlo54.core.service.LocationService;
-=======
 import lo54.projetlo54.core.repository.CourseSessionDao;
 import lo54.projetlo54.core.service.ClientService;
->>>>>>> origin/master
-
 /**
  * Actions sur la base de données (tests)
  * @author Jordan
@@ -79,7 +75,6 @@ public class Application {
         
 =======
  */       
->>>>>>> origin/master
         // affichage de toute la table Course
 /*        CourseService courseService = new CourseService();
         courseService.affichageTableEntiere();

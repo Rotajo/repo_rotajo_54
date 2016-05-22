@@ -30,40 +30,22 @@ public class FiltreServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //LocationDao locations = LocationDao
             /* TODO output your page here. You may use following sample code. */
-            List<Location> location = new LocationDao().recupererTout();
-        request.setAttribute("location", location);
-        
-        
-        request.getRequestDispatcher("/WEB-INF/filtre.jsp").forward(request, response);
-            /*out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FiltreServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FiltreServlet at " + request.getContextPath() + "</h1>");
+            //List<Location> location = new LocationDao().recupererTout();
+        //request.setAttribute("location", location);
+        //request.getRequestDispatcher("/filtre.jsp").forward(request, response);
             
-            
-            out.println("<h1>Recherche liste des formations</h1>");
-            
-            
-            out.println("<form method='GET' action='../ProjetLO54/session'>");
-            out.println("<p><label>Par titre</label> : <input type='text' name='title'/></p>");
-            out.println("<p><label>Par date</label> : <input type='text' name='date'/></p>");
-            out.println("<p><label>Par lieu</label> : <input type='text' name='location'/></p>");
-            out.println("<input type='submit' value='Valider'/>");
-            out.println("</form>");
-            
-            out.println("</body>");
-            out.println("</html>");*/
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
+  
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

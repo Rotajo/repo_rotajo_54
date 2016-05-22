@@ -4,20 +4,31 @@
     Author     : Syntiche
 --%>
 
+<%@page import="lo54.projetlo54.core.repository.LocationDao"%>
+<%@page import="lo54.projetlo54.core.entity.Location"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     </head>
     <body>
         <h1>Recherche liste des formations</h1>
         
-        <form method='GET' action='../ProjetLO54/session'>
+        <%
+            List<Location> location = new LocationDao().recupererTout();
+        %>
+        
+        <form method='GET' action='../ProjetLO54/filtre'>
             <p><label>Par titre</label> : <input type='text' name='title'/></p>
-            <p><label>Par date</label> : <input type='text' name='date'/></p>
+            <p><label>Par date: (jj mm aaaa)</label> : <input type='text' name='date'/>
+            \t<input type='text' name='date'/>
+            \t<input type='text' name='date'/>
+            </p>
             <p><label>Par lieu</label> : <select name='location'>
                 <c:forEach items="${location}" var="location">
                     <option value="${location.idLocation}"><c:out value="${location.city}" /></option>
