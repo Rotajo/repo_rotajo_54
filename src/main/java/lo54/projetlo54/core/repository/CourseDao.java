@@ -84,5 +84,41 @@ public class CourseDao {
         return l;
     }
     
+    /**
+     * Récupération d'un cours
+     * @param codeCourse  CODE de la table Course
+     * @return le cours
+     */
+    public Course getCourse(String codeCourse)
+    {
+        Course cs = null;
+        
+        // connexion à la base de données
+        Session session = HibernateUtil.getSessionFactory().openSession();
+               
+        try {
+            session.beginTransaction();         // début de transaction
+            
+            // récupère la ligne souhaitée de la table Location
+            Query query = session.createQuery("from Course where code = :code");
+            query.setParameter("code", codeCourse);
+            cs = (Course) query.uniqueResult();
+            
+                        
+        } catch (HibernateException he) {
+            he.printStackTrace();
+            if(session.getTransaction() != null) { 
+                try {
+                    session.getTransaction().rollback();	
+                }catch(HibernateException he2) {he2.printStackTrace(); }
+            }
+            
+        } finally {
+            if(session != null) 
+                session.close();
+        }
+        
+        return cs;
+    }
     
 } // fin de classe ClientDao

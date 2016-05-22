@@ -31,6 +31,7 @@ public class FormServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+                
         try (PrintWriter out = response.getWriter()) {
             
             // =================================================================
@@ -46,15 +47,18 @@ public class FormServlet extends HttpServlet {
             // =================================================================
             // Formulaire d'inscription à une session de cours            
             out.println("<form method='POST' action='../ProjetLO54/session'>");
-            out.println("<p><label>Nom de famille</label> : <input type='text' name='lastname'/></p>");
-            out.println("<p><label>Prénom</label> : <input type='text' name='firstname'/></p>");
-            out.println("<p><label>Adresse</label> : <input type='text' name='address'/></p>");
-            out.println("<p><label>Numéro de téléphone </label> : <input type='tel' name='phone'/></p>");
-            out.println("<p><label>Email (falcutatif)</label> : <input type='email' name='email'/></p>");
-            out.println("<input type='submit' value='Valider'/>");
+            out.println("<p><label><b>Nom de famille (*)</b></label> : <input type='text' name='lastname'/></p>");
+            out.println("<p><label><b>Prénom (*)</b></label> : <input type='text' name='firstname'/></p>");
+            out.println("<p><label><b>Adresse (*)</b></label> : <input type='text' name='address'/></p>");
+            out.println("<p><label><b>Numéro de téléphone (*)</b></label> : <input type='tel' name='phone'/></p>");
+            out.println("<p><label><b>Email</b></label> : <input type='email' name='email'/></p>");
+            out.println("<br><input type='submit' value='Valider'/>");
+            // sauvegarde de l'id de la session choisie par l'utilisateur
+            out.println("<input type='hidden' name='idsession' value='6' />");
             out.println("</form>");
             // =================================================================
             // pieds de page HTML
+            out.println("<br><hr><br><i>(*) champs obligatoires</i>"); 
             out.println("</center>"); 
             out.println("</body>");
             out.println("</html>");

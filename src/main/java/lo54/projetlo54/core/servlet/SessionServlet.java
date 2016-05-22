@@ -60,7 +60,9 @@ public class SessionServlet extends HttpServlet {
             
             // Récupération des étudiants inscrits
             ClientDao cld = new ClientDao();
-            List<Client> listClient = cld.recupererTout();
+            
+            Integer idSession = Integer.parseInt(request.getParameter("idsession"));
+            
             // =================================================================
             // en-tête HTML
             out.println("<!DOCTYPE html>");
@@ -70,32 +72,74 @@ public class SessionServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<center>");
-            out.println("<br><h1><u>Affichage global</u></h1><br><hr>");  
-            // ================================================================= 
+            out.println("<br><h1><u>Session de cours et étudiants inscrits</u></h1><br><hr>");  
+            
             // =================================================================
-            // affichage de la table COURSE_SESSION
-            out.println("<h3><u><i>Session de cours :</i></u></h3>");
+            // affichage des données rentrées dans le formulaire          
+            out.println("<h3><u><i>Vos coordonnées :</i></u></h3>");  
+            out.println("<p><u><b>Nom de famille :</b></u> "+request.getParameter("firstname")+"");
+            out.println("<br><u><b>Prénom :</b></u> "+request.getParameter("lastname")+"");
+            out.println("<br><u><b>Adresse :</b></u> "+request.getParameter("address")+"");
+            out.println("<br><u><b>Numéro :</b></u> "+request.getParameter("phone")+"");
+            out.println("<br><u><b>Email :</b></u> "+request.getParameter("email")+"</p>"); 
+            
+            // =================================================================
+            // ajout de l'étudiant dans la table Client
+            // SI les données de lastname, firstname, address & phone sont rentrées et correctes
+            
+            // vérificactions
+            if(request.getParameter("lastname").isEmpty() |
+               request.getParameter("firstname").isEmpty() |
+               request.getParameter("address").isEmpty() |
+               request.getParameter("phone").isEmpty() ) {
+                
+             //   this.getServletContext().getRequestDispatcher( "../ProjetLO54/form")
+             //   .forward( request, response );
+                
+                out.println("<h2><font color='red'>Le formulaire n'est pas correctement rempli !</font></h2>");
+                out.println("<h3><a href='../ProjetLO54/form'>Retour au formulaire</a></h3>");
+                
+            }
+            else {
+                CourseSession cs = new CourseSession();     
+                cs.setIdCourseSession(idSession);
+                Client client = new Client(cs, 
+                                            request.getParameter("lastname"),
+                                            request.getParameter("firstname"),
+                                            request.getParameter("address"),
+                                            request.getParameter("phone"), 
+                                            request.getParameter("email") );
+                cld.ajouter(client);
+            }
+            
+            // ================================================================= 
+            // affichage de la session de cours choisie
+            out.println("<hr><h3><u><i>Vous avez choisi la session :</i></u></h3>");
             out.print("<table border=1>");
             out.print("<tr>");
             out.print("<th>ID session</th>");
             out.print("<th>Code UV</th>");
+            out.print("<th>Titre</th>");
             out.print("<th>Ville</th>");
             out.print("<th>Date Début</th>");
             out.print("<th>Date Fin</th>");
             out.print("</tr>");
-            for(CourseSession cs : listCourseSession){
+            CourseSession cs = csd.getSession(idSession);
+            Course cc = cd.getCourse(cs.getCourse().getCode());
                 out.print("<tr>");
                 out.print("<td>"+cs.getIdCourseSession()+"</td>");
                 out.print("<td>"+cs.getCourse().getCode()+"</td>");
+                out.print("<td>"+cc.getTitle()+"</td>");
                 out.print("<td>"+ld.nomVille(cs.getLocation().getIdLocation())+"</td>");
                 out.print("<td>"+cs.getStartDate()+"</td>");
                 out.print("<td>"+cs.getEndDate()+"</td>");
                 out.print("</tr>");
-            }
+            
             out.print("</table><br>"); 
+            
             // =================================================================
-            // affichage de la table CLIENT
- /*           out.println("<hr><h3><u><i>Etudiants inscrits :</i></u></h3>");
+            // affichage des étudiants incrits à cette session
+            out.println("<hr><h3><u><i>Les étudiants inscrits :</i></u></h3>");
             out.print("<table border=1>");
             out.print("<tr>");
             out.print("<th>ID Etudiant</th>");
@@ -104,8 +148,8 @@ public class SessionServlet extends HttpServlet {
             out.print("<th>Adresse</th>");
             out.print("<th>Numéro de téléphone</th>");
             out.print("<th>Email</th>");
-            out.print("<th>ID session</th>");
             out.print("</tr>");
+            List<Client> listClient = cld.getClientsForSession(idSession);
             for(Client cl : listClient){
                 out.print("<tr>");
                 out.print("<td>"+cl.getIdClient()+"</td>");
@@ -114,29 +158,9 @@ public class SessionServlet extends HttpServlet {
                 out.print("<td>"+cl.getAddress()+"</td>");
                 out.print("<td>"+cl.getPhone()+"</td>");
                 out.print("<td>"+cl.getEmail()+"</td>");
-                out.print("<td>"+cl.getCourseSession().getIdCourseSession()+"</td>");
                 out.print("</tr>");
             }
             out.print("</table><br>");   
-    */
-            
-            // =================================================================
-            // affichage des données rentrées dans le formulaire            
-            out.println("<h2>Nom de famille : "+request.getParameter("firstname")+"</h2>");
-            out.println("<h2>Prénom : "+request.getParameter("lastname")+"</h2>");
-            out.println("<h2>Adresse : "+request.getParameter("address")+"</h2>");
-            out.println("<h2>Numéro : "+request.getParameter("phone")+"</h2>");
-            out.println("<h2>Email : "+request.getParameter("email")+"</h2>"); 
-            
-            // ajout de l'étudiant dans la table Client (EN BRUTE : ID de session = 6)
-            CourseSession cs = new CourseSession();     cs.setIdCourseSession(6);
-            Client client = new Client(cs, 
-                                        request.getParameter("lastname"),
-                                        request.getParameter("firstname"),
-                                        request.getParameter("address"),
-                                        request.getParameter("phone"), 
-                                        request.getParameter("email") );
-            cld.ajouter(client);
             
             // =================================================================
             // pieds de page HTML

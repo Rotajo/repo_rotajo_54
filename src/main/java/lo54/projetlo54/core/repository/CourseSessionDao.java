@@ -84,11 +84,11 @@ public class CourseSessionDao {
     }
     
     /**
-     * Affichage d'un code UV
+     * Récupération d'une session de cours
      * @param idSession ID de la table CourseSession
-     * @return le code associé
+     * @return la session
      */
-    public String codeUV(int idSession)
+    public CourseSession getSession(int idSession)
     {
         CourseSession cs = null;
         
@@ -117,7 +117,7 @@ public class CourseSessionDao {
                 session.close();
         }
         
-        return cs.getCourse().getCode();
+        return cs;
     }
     
 } // fin de classe CourseSessionDao

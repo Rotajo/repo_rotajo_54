@@ -83,4 +83,40 @@ public class ClientDao {
         return l;
     }
     
+    /**
+     * Récupération d'une session de cours
+     * @param idSession ID de la table CourseSession
+     * @return la session
+     */
+    public List<Client> getClientsForSession(int idSession)
+    {
+        List<Client> l = null;     // liste de récupération
+        
+        // connexion à la base de données
+        Session session = HibernateUtil.getSessionFactory().openSession();
+               
+        try {
+            session.beginTransaction();         // début de transaction
+            
+            // récupère la ligne souhaitée de la table Location
+            Query query = session.createQuery("from Client where courseSession.idCourseSession = :id");
+            query.setParameter("id", idSession);
+            l = query.list();
+                                    
+        } catch (HibernateException he) {
+            he.printStackTrace();
+            if(session.getTransaction() != null) { 
+                try {
+                    session.getTransaction().rollback();	
+                }catch(HibernateException he2) {he2.printStackTrace(); }
+            }
+            
+        } finally {
+            if(session != null) 
+                session.close();
+        }
+        
+        return l;
+    }
+    
 } // fin de classe ClientDao
