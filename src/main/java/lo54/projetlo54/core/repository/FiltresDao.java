@@ -43,6 +43,7 @@ public class FiltresDao {
             }
         }
         
+        
         return result;
     }
     
@@ -69,20 +70,68 @@ public class FiltresDao {
         return result;
     }
     
-    /*public List<CourseSession> filtreLieu(String){
+    public List<Course> filtreLocation(int param){
+        List<Course> result = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            session.beginTransaction();
+            result = session.createQuery("FROM CourseSession WHERE location = :id")
+                .setParameter("id", param)
+                .list();
+        } catch (HibernateException e){
+            e.printStackTrace();
+            if (session.getTransaction() != null){
+                try{
+                    session.getTransaction().rollback();
+                } catch (HibernateException e1){}
+            }
+        } finally {
+            if (session != null){
+                session.close();
+            }
+        }
         
-    }*/
+        return result;
+    }
     
-    /*String hql = "from Product p inner join p.category";
- 
-Query query = session.createQuery(hql);
-List<Object[]> listResult = query.list();
- 
-for (Object[] aRow : listResult) {
-    Product product = (Product) aRow[0];
-    Category category = (Category) aRow[1];
-    System.out.println(product.getName() + " - " + category.getName());
-}*/
+    public List<CourseSession> filtreSessions(String title, String date, int location){
+        List<CourseSession> result = null;
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            session.beginTransaction();
+            result = session.createQuery("FROM CourseSession p WHERE p.course.title LIKE :titre OR p.startDate < :date AND p.endDate > :date OR p.location = :id")
+                .setString("titre", "%" + title + "%")
+                .setString("date", date)
+                .setInteger("id", location)
+                .list();
+        } catch (HibernateException e){
+            e.printStackTrace();
+            if (session.getTransaction() != null){
+                try{
+                    session.getTransaction().rollback();
+                } catch (HibernateException e1){}
+            }
+        } finally {
+            if (session != null){
+                session.close();
+            }
+        }
+        
+        /*if(title != null || "".equals(title)){
+            filtreTitre(title);
+        }
+        if(date != null || "".equals(date)){
+            filtreDate(date);
+        }
+        if(location != 0){
+            filtreLocation(location);
+        }*/
+        
+        return result;
+    }
+    
+    
 }
     
     

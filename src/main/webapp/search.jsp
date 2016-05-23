@@ -19,17 +19,16 @@
     <body>
         <h1>Recherche liste des formations</h1>
         
-        <%
-            List<Location> location = new LocationDao().recupererTout();
-        %>
         
-        <form method='GET' action='../ProjetLO54/filtre'>
+        
+        <form method='POST' action='../ProjetLO54/filtre'>
             <p><label>Par titre</label> : <input type='text' name='title'/></p>
-            <p><label>Par date: (jj mm aaaa)</label> : <input type='text' name='date'/>
-            \t<input type='text' name='date'/>
-            \t<input type='text' name='date'/>
+            <p><label>Par date: (jj mm aaaa)</label> : <input type='text' name='day'/>
+            \t<input type='text' name='month'/>
+            \t<input type='text' name='year'/>
             </p>
             <p><label>Par lieu</label> : <select name='location'>
+                    <option value="0"></option> 
                 <c:forEach items="${location}" var="location">
                     <option value="${location.idLocation}"><c:out value="${location.city}" /></option>
                 </c:forEach>

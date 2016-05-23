@@ -7,6 +7,10 @@
         <servlet-class>lo54.projetlo54.core.servlet.HomeServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>lo54.projetlo54.core.servlet.SearchServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>FiltreServlet</servlet-name>
         <servlet-class>lo54.projetlo54.core.servlet.FiltreServlet</servlet-class>
     </servlet>
@@ -15,6 +19,10 @@
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <!-- Configuration de session -->
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FiltreServlet</servlet-name>
         <url-pattern>/filtre</url-pattern>

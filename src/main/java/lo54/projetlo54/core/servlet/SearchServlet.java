@@ -7,21 +7,19 @@ package lo54.projetlo54.core.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lo54.projetlo54.core.entity.CourseSession;
-import lo54.projetlo54.core.repository.FiltresDao;
+import lo54.projetlo54.core.entity.Location;
+import lo54.projetlo54.core.repository.LocationDao;
 
 /**
  *
  * @author Syntiche
  */
-
-
-public class FiltreServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,38 +30,22 @@ public class FiltreServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String title = request.getParameter("title");
-        /*Calendar date = Calendar.getInstance(); 
-        date.set(Calendar.YEAR, Integer.getInteger(request.getParameter("year")));   
-        date.set(Calendar.MONTH, Integer.getInteger(request.getParameter("month")));  
-        date.set(Calendar.DAY_OF_YEAR, Integer.getInteger(request.getParameter("day")));     
-        */
-        
-        
-        String id = request.getParameter("location");
-        String year = request.getParameter("year");
-        String month = request.getParameter("month");
-        String day = request.getParameter("day");
-        
-        String date = year + "-" + month + "-" + day;
-        int location = Integer.parseInt(id);
-        //System.out.println("This is what I got: " + title + " " + date);// + " " + location);
         try (PrintWriter out = response.getWriter()) {
-            System.out.println("About to check filtres");
-            FiltresDao fd = new FiltresDao();
-            for (CourseSession cc : fd.filtreSessions(title, date, location)){
-                out.print("This is what I got: " +cc.getIdCourseSession());
-            }
-            //out.print("This is what I got: " + title + " " + date  + " " + location);
+            /* TODO output your page here. You may use following sample code. */
+            List<Location> location = new LocationDao().recupererTout();
+        request.setAttribute("location", location);
+        request.getRequestDispatcher("/search.jsp").forward(request, response);
+            
         } catch (Exception e){
             e.printStackTrace();
         }
-        
-        
     }
+  
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

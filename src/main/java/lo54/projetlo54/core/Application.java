@@ -66,15 +66,17 @@ public class Application {
         
         LocationDao ld = new LocationDao();
         System.out.println("Nom de la ville de code 1 = " + ld.nomVille(1));
-<<<<<<< HEAD
         
+        CourseSession cc : fd.filtreSessions("de", "2015-11-01", 1
+ */
+        System.out.println("About to check filtres");
         FiltresDao fd = new FiltresDao();
-        for (CourseSession cc : fd.filtreDate("2015-11-01")){
+        for (CourseSession cc : fd.filtreSessions("de", "2015-11-01", 1)){
             System.out.println(cc.getIdCourseSession());
         }
         
-=======
- */       
+
+       
         // affichage de toute la table Course
 /*        CourseService courseService = new CourseService();
         courseService.affichageTableEntiere();
