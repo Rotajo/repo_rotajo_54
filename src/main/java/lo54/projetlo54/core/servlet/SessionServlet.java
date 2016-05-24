@@ -41,113 +41,120 @@ public class SessionServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        
-        try (PrintWriter out = response.getWriter()) {
-            
-            HttpSession session = request.getSession();
-                        
-            // Récupération des cours
-            CourseDao cd = new CourseDao();
-            List<Course> listCourse = cd.recupererTout();
-            
-            // Récupération des lieux
-            LocationDao ld = new LocationDao();
-            List<Location> listLocation = ld.recupererTout();
-            
-            // Récupération des session de cours
-            CourseSessionDao csd = new CourseSessionDao();
-            List<CourseSession> listCourseSession = csd.recupererTout();
-            
-            // Récupération des étudiants inscrits
-            ClientDao cld = new ClientDao();
-            List<Client> listClient = cld.recupererTout();
-            // =================================================================
-            // en-tête HTML
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ListServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<center>");
-            out.println("<br><h1><u>Affichage global</u></h1><br><hr>");  
-            // ================================================================= 
-            // =================================================================
-            // affichage de la table COURSE_SESSION
-            out.println("<h3><u><i>Session de cours :</i></u></h3>");
-            out.print("<table border=1>");
-            out.print("<tr>");
-            out.print("<th>ID session</th>");
-            out.print("<th>Code UV</th>");
-            out.print("<th>Ville</th>");
-            out.print("<th>Date Début</th>");
-            out.print("<th>Date Fin</th>");
-            out.print("</tr>");
-            for(CourseSession cs : listCourseSession){
+        if (request.getParameter("type").equals("register")){
+            try (PrintWriter out = response.getWriter()) {
+
+                HttpSession session = request.getSession();
+
+                // Récupération des cours
+                CourseDao cd = new CourseDao();
+                List<Course> listCourse = cd.recupererTout();
+
+                // Récupération des lieux
+                LocationDao ld = new LocationDao();
+                List<Location> listLocation = ld.recupererTout();
+
+                // Récupération des session de cours
+                CourseSessionDao csd = new CourseSessionDao();
+                List<CourseSession> listCourseSession = csd.recupererTout();
+
+                // Récupération des étudiants inscrits
+                ClientDao cld = new ClientDao();
+                List<Client> listClient = cld.recupererTout();
+                // =================================================================
+                // en-tête HTML
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet ListServlet</title>");            
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<center>");
+                out.println("<br><h1><u>Affichage global</u></h1><br><hr>");  
+                // ================================================================= 
+                // =================================================================
+                // affichage de la table COURSE_SESSION
+                out.println("<h3><u><i>Session de cours :</i></u></h3>");
+                out.print("<table border=1>");
                 out.print("<tr>");
-                out.print("<td>"+cs.getIdCourseSession()+"</td>");
-                out.print("<td>"+cs.getCourse().getCode()+"</td>");
-                out.print("<td>"+ld.nomVille(cs.getLocation().getIdLocation())+"</td>");
-                out.print("<td>"+cs.getStartDate()+"</td>");
-                out.print("<td>"+cs.getEndDate()+"</td>");
+                out.print("<th>ID session</th>");
+                out.print("<th>Code UV</th>");
+                out.print("<th>Ville</th>");
+                out.print("<th>Date Début</th>");
+                out.print("<th>Date Fin</th>");
                 out.print("</tr>");
-            }
-            out.print("</table><br>"); 
-            // =================================================================
-            // affichage de la table CLIENT
- /*           out.println("<hr><h3><u><i>Etudiants inscrits :</i></u></h3>");
-            out.print("<table border=1>");
-            out.print("<tr>");
-            out.print("<th>ID Etudiant</th>");
-            out.print("<th>Nom de famille</th>");
-            out.print("<th>Prénom</th>");
-            out.print("<th>Adresse</th>");
-            out.print("<th>Numéro de téléphone</th>");
-            out.print("<th>Email</th>");
-            out.print("<th>ID session</th>");
-            out.print("</tr>");
-            for(Client cl : listClient){
+                for(CourseSession cs : listCourseSession){
+                    out.print("<tr>");
+                    out.print("<td>"+cs.getIdCourseSession()+"</td>");
+                    out.print("<td>"+cs.getCourse().getCode()+"</td>");
+                    out.print("<td>"+ld.nomVille(cs.getLocation().getIdLocation())+"</td>");
+                    out.print("<td>"+cs.getStartDate()+"</td>");
+                    out.print("<td>"+cs.getEndDate()+"</td>");
+                    out.print("</tr>");
+                }
+                out.print("</table><br>"); 
+
+                // =================================================================
+                // affichage de la table CLIENT
+     /*           out.println("<hr><h3><u><i>Etudiants inscrits :</i></u></h3>");
+                out.print("<table border=1>");
                 out.print("<tr>");
-                out.print("<td>"+cl.getIdClient()+"</td>");
-                out.print("<td>"+cl.getLastname()+"</td>");
-                out.print("<td>"+cl.getFirstname()+"</td>");
-                out.print("<td>"+cl.getAddress()+"</td>");
-                out.print("<td>"+cl.getPhone()+"</td>");
-                out.print("<td>"+cl.getEmail()+"</td>");
-                out.print("<td>"+cl.getCourseSession().getIdCourseSession()+"</td>");
+                out.print("<th>ID Etudiant</th>");
+                out.print("<th>Nom de famille</th>");
+                out.print("<th>Prénom</th>");
+                out.print("<th>Adresse</th>");
+                out.print("<th>Numéro de téléphone</th>");
+                out.print("<th>Email</th>");
+                out.print("<th>ID session</th>");
                 out.print("</tr>");
-            }
-            out.print("</table><br>");   
-    */
+                for(Client cl : listClient){
+                    out.print("<tr>");
+                    out.print("<td>"+cl.getIdClient()+"</td>");
+                    out.print("<td>"+cl.getLastname()+"</td>");
+                    out.print("<td>"+cl.getFirstname()+"</td>");
+                    out.print("<td>"+cl.getAddress()+"</td>");
+                    out.print("<td>"+cl.getPhone()+"</td>");
+                    out.print("<td>"+cl.getEmail()+"</td>");
+                    out.print("<td>"+cl.getCourseSession().getIdCourseSession()+"</td>");
+                    out.print("</tr>");
+                }
+                out.print("</table><br>");   
+        */
+
+                // =================================================================
+                // affichage des données rentrées dans le formulaire            
+                out.println("<h2>Nom de famille : "+request.getParameter("firstname")+"</h2>");
+                out.println("<h2>Prénom : "+request.getParameter("lastname")+"</h2>");
+                out.println("<h2>Adresse : "+request.getParameter("address")+"</h2>");
+                out.println("<h2>Numéro : "+request.getParameter("phone")+"</h2>");
+                out.println("<h2>Email : "+request.getParameter("email")+"</h2>"); 
+
+                // ajout de l'étudiant dans la table Client (EN BRUTE : ID de session = 6)
+                CourseSession cs = new CourseSession();     cs.setIdCourseSession(6);
+                Client client = new Client(cs, 
+                                            request.getParameter("lastname"),
+                                            request.getParameter("firstname"),
+                                            request.getParameter("address"),
+                                            request.getParameter("phone"), 
+                                            request.getParameter("email") );
+                cld.ajouter(client);
+
+                // =================================================================
+                // pieds de page HTML
+                out.println("</center>");
+                out.println("</body>");
+                out.println("</html>");
+
+
+                // afficher le fichier.jsp associé
+                /*this.getServletContext().getRequestDispatcher( "/jsp/HomeJsp.jsp")
+                    .forward( request, response );*/
+            } 
+
+        } else {
             
-            // =================================================================
-            // affichage des données rentrées dans le formulaire            
-            out.println("<h2>Nom de famille : "+request.getParameter("firstname")+"</h2>");
-            out.println("<h2>Prénom : "+request.getParameter("lastname")+"</h2>");
-            out.println("<h2>Adresse : "+request.getParameter("address")+"</h2>");
-            out.println("<h2>Numéro : "+request.getParameter("phone")+"</h2>");
-            out.println("<h2>Email : "+request.getParameter("email")+"</h2>"); 
-            
-            // ajout de l'étudiant dans la table Client (EN BRUTE : ID de session = 6)
-            CourseSession cs = new CourseSession();     cs.setIdCourseSession(6);
-            Client client = new Client(cs, 
-                                        request.getParameter("lastname"),
-                                        request.getParameter("firstname"),
-                                        request.getParameter("address"),
-                                        request.getParameter("phone"), 
-                                        request.getParameter("email") );
-            cld.ajouter(client);
-            
-            // =================================================================
-            // pieds de page HTML
-            out.println("</center>");
-            out.println("</body>");
-            out.println("</html>");
             
             
-            // afficher le fichier.jsp associé
-            /*this.getServletContext().getRequestDispatcher( "/jsp/HomeJsp.jsp")
-                .forward( request, response );*/
         }
     }
 

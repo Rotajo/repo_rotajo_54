@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+     
+             <head>  
+             <title>Inscription UV</title>    
+             <link rel='stylesheet' href='../ProjetLO54/CSS/style.css' type='text/css' media='screen' />  
+             </head>  
+             <body>    
+             <div class="wrapper">
+                 <div class='title'> <h1>S'inscrire à une UV :</h1></div>   
+               
+             <form method='POST' action='../ProjetLO54/session'> 
+                 <table style='width:30%'>
+             <tr><td><input type='hidden' name='type' value='register'/>  <td></tr> 
+             <tr><td><label>Nom de famille</label> </td><td> <input type='text' name='lastname'/><td></tr>  
+             <tr><td><label>Prénom</label> </td><td> <input type='text' name='firstname'/><td></tr>  
+             <tr><td><label>Adresse</label> </td><td> <input type='text' name='address'/><td></tr>  
+             <tr><td><label>Numéro de téléphone </label> </td><td> <input type='tel' name='phone'/><td></tr>  
+             <tr><td><label>Email (falcutatif)</label> </td><td> <input type='email' name='email'/><td></tr>  
+             </table>  
+             <p><input type='submit' value='Valider'/></p>  
+             </form>  
+             </div>
+    </body>
+</html>

@@ -66,7 +66,7 @@ public class HomeServlet extends HttpServlet {
             out.println("<title>Servlet ListServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<center>");
+            out.println("<div class='wrapper'>");
             out.println("<br><h1><u>Affichage global</u></h1><br><hr>");  
             // =================================================================
             // affichage de la table COURSE
@@ -146,7 +146,7 @@ public class HomeServlet extends HttpServlet {
             out.print("</table><br>");   
             // =================================================================
             // pieds de page HTML
-            out.println("</center>");
+            out.println("</div>");
             out.println("</body>");
             out.println("</html>");
             

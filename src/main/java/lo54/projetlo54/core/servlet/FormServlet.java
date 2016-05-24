@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Formulaire d'inscription à une session de cours
@@ -38,24 +37,28 @@ public class FormServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet FormServlet</title>");            
+            out.println("<title>Inscription UV</title>");  
+            out.println("<link rel='stylesheet' href='../ProjetLO54/CSS/style.css' type='text/css' media='screen' />");
             out.println("</head>");
             out.println("<body>");
-            out.println("<center>");
-            out.println("<br><h1><u>S'inscrire à une UV :</u></h1><br><hr><br>");  
+            out.println("<div class='wrapper'>");
+            out.println("<div class='title'> <h1>S'inscrire à une UV :</h1></div>");
             // =================================================================
-            // Formulaire d'inscription à une session de cours            
+            // Formulaire d'inscription à une session de cours  
+            out.println("<table style='width:30%'>");
             out.println("<form method='POST' action='../ProjetLO54/session'>");
-            out.println("<p><label>Nom de famille</label> : <input type='text' name='lastname'/></p>");
-            out.println("<p><label>Prénom</label> : <input type='text' name='firstname'/></p>");
-            out.println("<p><label>Adresse</label> : <input type='text' name='address'/></p>");
-            out.println("<p><label>Numéro de téléphone </label> : <input type='tel' name='phone'/></p>");
-            out.println("<p><label>Email (falcutatif)</label> : <input type='email' name='email'/></p>");
-            out.println("<input type='submit' value='Valider'/>");
+            out.println("<input type='hidden' name='type' value='register'/>");
+            out.println("<tr><td><label>Nom de famille</label> </td><td> <input type='text' name='lastname'/><td></tr>");
+            out.println("<tr><td><label>Prénom</label> </td><td> <input type='text' name='firstname'/><td></tr>");
+            out.println("<tr><td><label>Adresse</label> </td><td> <input type='text' name='address'/><td></tr>");
+            out.println("<tr><td><label>Numéro de téléphone </label> </td><td> <input type='tel' name='phone'/><td></tr>");
+            out.println("<tr><td><label>Email (falcutatif)</label> </td><td> <input type='email' name='email'/><td></tr>");
+            out.println("</table>");
+            out.println("<p><input type='submit' value='Valider'/></p>");
             out.println("</form>");
             // =================================================================
             // pieds de page HTML
-            out.println("</center>"); 
+            out.println("</div>"); 
             out.println("</body>");
             out.println("</html>");
         }

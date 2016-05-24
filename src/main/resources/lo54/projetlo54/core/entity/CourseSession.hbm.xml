@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15 mai 2016 21:15:59 by Hibernate Tools 4.3.1 @author Jordan -->
 <hibernate-mapping>
-    <class name="lo54.projetlo54.core.entity.CourseSession" table="course_session" catalog="lo54" optimistic-lock="version">
+    <class name="lo54.projetlo54.core.entity.CourseSession" table="course_session" catalog="lo54" lazy="false" optimistic-lock="version">
         <id name="idCourseSession" type="java.lang.Integer">
             <column name="ID_COURSE_SESSION" />
             <generator class="identity" />
@@ -20,7 +20,7 @@
         <property name="endDate" type="date">
             <column name="END_DATE" length="10" not-null="true" />
         </property>
-        <set name="clients" table="client" inverse="true" lazy="true" fetch="select">
+        <set name="clients" table="client" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="COURSE_SESSION_ID" />
             </key>

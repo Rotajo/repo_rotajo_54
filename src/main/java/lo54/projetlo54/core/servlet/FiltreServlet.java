@@ -7,8 +7,8 @@ package lo54.projetlo54.core.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,29 +35,35 @@ public class FiltreServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //List<CourseSession> courseList = new ArrayList<CourseSession>();
+        
         String title = request.getParameter("title");
-        /*Calendar date = Calendar.getInstance(); 
-        date.set(Calendar.YEAR, Integer.getInteger(request.getParameter("year")));   
-        date.set(Calendar.MONTH, Integer.getInteger(request.getParameter("month")));  
-        date.set(Calendar.DAY_OF_YEAR, Integer.getInteger(request.getParameter("day")));     
-        */
         
-        
-        String id = request.getParameter("location");
         String year = request.getParameter("year");
         String month = request.getParameter("month");
-        String day = request.getParameter("day");
-        
+        String day = request.getParameter("day");        
         String date = year + "-" + month + "-" + day;
+        
+        String id = request.getParameter("location");
+        
         int location = Integer.parseInt(id);
-        //System.out.println("This is what I got: " + title + " " + date);// + " " + location);
+        FiltresDao fd = new FiltresDao();
+        List<CourseSession> courseList = fd.filtreSessions(title, date, location);
         try (PrintWriter out = response.getWriter()) {
-            System.out.println("About to check filtres");
-            FiltresDao fd = new FiltresDao();
-            for (CourseSession cc : fd.filtreSessions(title, date, location)){
-                out.print("This is what I got: " +cc.getIdCourseSession());
+            if (courseList == null || courseList.isEmpty()){
+                out.print("<p>Il n'existe pas de formations qui correspondent a vos criteres");
+            } else {
+                out.println("<table style='width:75%'>");
+                out.println("<form method='POST' action='../ProjetLO54/session>");
+                out.println("<input type='hidden' name='type' value='search'/>");
+                for (CourseSession cc : courseList){
+                    out.print("<tr><td><input type='radio' name= 'course_selection' value='" + cc.getIdCourseSession() + "'></td><td>" + cc.getCourse().getTitle() + "</td></tr>");
+                }
+                
+                out.println("</table>");
+                out.println("<p><input type='submit' value='Submit'/></p>");
+                out.println("</form>");
             }
-            //out.print("This is what I got: " + title + " " + date  + " " + location);
         } catch (Exception e){
             e.printStackTrace();
         }
