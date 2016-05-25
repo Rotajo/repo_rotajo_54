@@ -140,7 +140,7 @@ public class HomeServlet extends HttpServlet {
                 out.print("<td>"+cl.getAddress()+"</td>");
                 out.print("<td>"+cl.getPhone()+"</td>");
                 out.print("<td>"+cl.getEmail()+"</td>");
-                out.print("<td>"+csd.codeUV(cl.getCourseSession().getIdCourseSession())+"</td>");
+                out.print("<td>"+csd.getSession(cl.getCourseSession().getIdCourseSession()).getCourse().getCode()+"</td>");
                 out.print("</tr>");
             }
             out.print("</table><br>");   

@@ -7,10 +7,14 @@ package lo54.projetlo54.core.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lo54.projetlo54.core.entity.CourseSession;
+import lo54.projetlo54.core.repository.CourseSessionDao;
 
 /**
  * Formulaire d'inscription à une session de cours
@@ -30,6 +34,19 @@ public class FormServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        int searchID = 0;
+        boolean visible;
+        //CourseSessionDao csd = new CourseSesson
+        try{
+            searchID = Integer.parseInt(request.getParameter("sessionID"));
+            visible = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            visible = false;
+        }
+        CourseSessionDao csd = new CourseSessionDao();
+            List<CourseSession> listCourseSession = csd.recupererTout();
+        
         try (PrintWriter out = response.getWriter()) {
             
             // =================================================================
@@ -46,19 +63,45 @@ public class FormServlet extends HttpServlet {
             // =================================================================
             // Formulaire d'inscription à une session de cours  
             out.println("<table style='width:30%'>");
+
+           // out.println("<input type='hidden' name='type' value='register'/>");
             out.println("<form method='POST' action='../ProjetLO54/session'>");
-            out.println("<input type='hidden' name='type' value='register'/>");
-            out.println("<tr><td><label>Nom de famille</label> </td><td> <input type='text' name='lastname'/><td></tr>");
-            out.println("<tr><td><label>Prénom</label> </td><td> <input type='text' name='firstname'/><td></tr>");
-            out.println("<tr><td><label>Adresse</label> </td><td> <input type='text' name='address'/><td></tr>");
-            out.println("<tr><td><label>Numéro de téléphone </label> </td><td> <input type='tel' name='phone'/><td></tr>");
-            out.println("<tr><td><label>Email (falcutatif)</label> </td><td> <input type='email' name='email'/><td></tr>");
-            out.println("</table>");
-            out.println("<p><input type='submit' value='Valider'/></p>");
+
+            out.println("<p><label><b>Nom de famille (*)</b></label> : <input type='text' name='lastname'/></p>");
+            out.println("<p><label><b>Prénom (*)</b></label> : <input type='text' name='firstname'/></p>");
+            out.println("<p><label><b>Adresse (*)</b></label> : <input type='text' name='address'/></p>");
+            out.println("<p><label><b>Numéro de téléphone (*)</b></label> : <input type='tel' name='phone'/></p>");
+            out.println("<p><label><b>Email</b></label> : <input type='email' name='email'/></p>");
+            
+            out.println("<br><input type='submit' value='Valider'/>");
+            
+            if (visible){
+                CourseSession ses = new CourseSession(csd.getSession(searchID));
+                out.println("<input type='hidden' name='searchID' value='"+ searchID+"'/>");
+                out.println("<p>Vous vous inscrivez a l'UV suivante:</p>");
+                out.println(ses.getCourse().getTitle());
+                out.println("<p>Commencant:  " + ses.getStartDate() + "</p>");
+                out.println("<p>Situe: "+ ses.getLocation().getCity() + "</p>");
+            } else {
+                for (CourseSession cc : listCourseSession){
+                    out.print("<tr><td><input type='radio' name= 'sessionID' value='" + cc.getIdCourseSession() + "'></td><td>" + cc.getCourse().getTitle() + "</td></tr>");
+                }
+            }
+            // sauvegarde de l'id de la session choisie par l'utilisateur
+            //out.println("<input type='hidden' name='sessionID' value='"' />");
+//>>>>>>> origin/master
             out.println("</form>");
+            //request.setAttribute("searchID", searchID);
+            //request.getRequestDispatcher("/session").forward(request, response);
+            
             // =================================================================
             // pieds de page HTML
+//<<<<<<< HEAD
             out.println("</div>"); 
+//=======
+            out.println("<br><hr><br><i>(*) champs obligatoires</i>"); 
+            out.println("</center>"); 
+//>>>>>>> origin/master
             out.println("</body>");
             out.println("</html>");
         }
