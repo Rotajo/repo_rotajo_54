@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 15 mai 2016 21:15:59 by Hibernate Tools 4.3.1 @author Jordan -->
 <hibernate-mapping>
-    <class name="lo54.projetlo54.core.entity.Location" table="location" catalog="lo54" optimistic-lock="version">
+    <class name="lo54.projetlo54.core.entity.Location" table="location" lazy="false" catalog="lo54" optimistic-lock="version">
         <id name="idLocation" type="java.lang.Integer">
             <column name="ID_LOCATION" />
             <generator class="identity" />
@@ -11,7 +11,7 @@
         <property name="city" type="string">
             <column name="CITY" length="50" not-null="true" />
         </property>
-        <set name="courseSessions" table="course_session" inverse="true" lazy="true" fetch="select">
+        <set name="courseSessions" table="course_session" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="LOCATION_ID" />
             </key>

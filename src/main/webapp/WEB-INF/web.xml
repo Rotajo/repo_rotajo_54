@@ -7,14 +7,6 @@
         <servlet-class>lo54.projetlo54.core.servlet.HomeServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>lo54.projetlo54.core.servlet.SearchServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>FiltreServlet</servlet-name>
-        <servlet-class>lo54.projetlo54.core.servlet.FiltreServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>FormServlet</servlet-name>
         <servlet-class>lo54.projetlo54.core.servlet.FormServlet</servlet-class>
     </servlet>
@@ -22,19 +14,15 @@
         <servlet-name>SessionServlet</servlet-name>
         <servlet-class>lo54.projetlo54.core.servlet.SessionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>lo54.projetlo54.core.servlet.SearchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <!-- Configuration de session -->
-    <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/search</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FiltreServlet</servlet-name>
-        <url-pattern>/filtre</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FormServlet</servlet-name>
         <url-pattern>/form</url-pattern>
@@ -42,6 +30,10 @@
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>
         <url-pattern>/session</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

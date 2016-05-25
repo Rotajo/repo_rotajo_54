@@ -22,7 +22,7 @@ public class FiltresDao {
         
     }
     
-    public List<Course> filtreTitre(String param){
+    /*public List<Course> filtreTitre(String param){
         List<Course> result = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
@@ -92,7 +92,7 @@ public class FiltresDao {
         }
         
         return result;
-    }
+    }*/
     
     public List<CourseSession> filtreSessions(String title, String date, int location){
         List<CourseSession> result = null;
@@ -100,8 +100,8 @@ public class FiltresDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
             session.beginTransaction();
-            result = session.createQuery("FROM CourseSession p FETCH ALL PROPERTIES WHERE p.course.title LIKE :titre OR p.startDate < :date AND p.endDate > :date OR p.location = :id")
-                .setString("titre", "%" + title + "%")
+            result = session.createQuery("FROM CourseSession p WHERE p.course.title LIKE :titre OR (p.startDate < :date AND p.endDate > :date) OR p.location = :id")
+                .setString("titre", title)
                 .setString("date", date)
                 .setInteger("id", location)
                 .list();

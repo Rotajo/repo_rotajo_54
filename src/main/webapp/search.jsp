@@ -13,19 +13,25 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Chercher une UV</title>
+        <link rel='stylesheet' href='CSS/style.css' type='text/css' media='screen' />
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     </head>
     <body>
-        <h1>Recherche liste des formations</h1>
         
+        <div class="title"> <h1>Recherche liste des formations</h1></div>
         
-        
-        <form method='POST' action='../ProjetLO54/filtre'>
+        <%
+        List<Location> location = new LocationDao().recupererTout();
+        request.setAttribute("location", location);
+        %>
+        <div class="main_content">
+        <form method='POST' action='../ProjetLO54/search'>
             <p><label>Par titre</label> : <input type='text' name='title'/></p>
-            <p><label>Par date: (jj mm aaaa)</label> : <input type='text' name='day'/>
-            \t<input type='text' name='month'/>
-            \t<input type='text' name='year'/>
+            <p><label>Par date: (jj mm aaaa)</label> : 
+            <input type='text' name='day' size="3"/>
+            &nbsp;<input type='text' name='month' size="3"/>
+            &nbsp;<input type='text' name='year' size="4"/>
             </p>
             <p><label>Par lieu</label> : <select name='location'>
                     <option value="0"></option> 
@@ -36,5 +42,6 @@
             </p>
             <input type='submit' value='Valider'/>
         </form>
+        </div>
     </body>
 </html>

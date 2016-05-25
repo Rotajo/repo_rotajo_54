@@ -36,13 +36,5 @@ public class CourseService {
     
     }
     
-    public void affichageTableEntiere(String param){
-        FiltresDao fd = new FiltresDao();
-        
-        l = fd.filtreTitre(param);
-        
-        for(Course cc: l){
-            System.out.println(cc.toString());
-        }
-    }
+    
 }
