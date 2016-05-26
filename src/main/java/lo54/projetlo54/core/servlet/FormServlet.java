@@ -67,13 +67,13 @@ public class FormServlet extends HttpServlet {
            // out.println("<input type='hidden' name='type' value='register'/>");
             out.println("<form method='POST' action='../ProjetLO54/session'>");
 
-            out.println("<p><label><b>Nom de famille (*)</b></label> : <input type='text' name='lastname'/></p>");
-            out.println("<p><label><b>Prénom (*)</b></label> : <input type='text' name='firstname'/></p>");
-            out.println("<p><label><b>Adresse (*)</b></label> : <input type='text' name='address'/></p>");
-            out.println("<p><label><b>Numéro de téléphone (*)</b></label> : <input type='tel' name='phone'/></p>");
-            out.println("<p><label><b>Email</b></label> : <input type='email' name='email'/></p>");
+            out.println("<p><label><b>Nom de famille (*)</b></label> : <input type='text' name='lastname' maxlength=\"30\" placeholder=\"ex : ROBERT\" autofocus required/></p>");
+            out.println("<p><label><b>Prénom (*)</b></label> : <input type='text' name='firstname' maxlength=\"30\" placeholder=\"ex : Julien\" required/></p>");
+            out.println("<p><label><b>Adresse (*)</b></label> : <input type='text' name='address' maxlength=\"100\" placeholder=\"22 Rue Cler PARIS\" required/></p>");
+            out.println("<p><label><b>Numéro de téléphone (*)</b></label> : <input type='tel' name='phone' maxlength=\"15\" placeholder=\"ex : 06 12 34 56 78\" required/></p>");
+            out.println("<p><label><b>Email</b></label> : <input type='email' name='email' maxlength=\"50\" placeholder=\"ex : xxx@yyy.zz\"/></p>");
             
-            out.println("<br><input type='submit' value='Valider'/>");
+            out.println("<input type='submit' value='Valider'/><br><hr><br>");
             
             if (visible){
                 CourseSession ses = new CourseSession(csd.getSession(searchID));
@@ -84,7 +84,8 @@ public class FormServlet extends HttpServlet {
                 out.println("<p>Situe: "+ ses.getLocation().getCity() + "</p>");
             } else {
                 for (CourseSession cc : listCourseSession){
-                    out.print("<tr><td><input type='radio' name= 'sessionID' value='" + cc.getIdCourseSession() + "'></td><td>" + cc.getCourse().getTitle() + "</td></tr>");
+                    out.print("<input type='radio' name= 'sessionID' value='" + cc.getIdCourseSession() + "'/><label> <b> : " + 
+                            cc.getCourse().getTitle() + "</b> <i>[à "+cc.getLocation().getCity()+" du "+cc.getStartDate()+" au "+cc.getEndDate()+"]</i></label><br>");
                 }
             }
             // sauvegarde de l'id de la session choisie par l'utilisateur
@@ -99,7 +100,7 @@ public class FormServlet extends HttpServlet {
 //<<<<<<< HEAD
             out.println("</div>"); 
 //=======
-            out.println("<br><hr><br><i>(*) champs obligatoires</i>"); 
+            out.println("<br><hr><i>(*) champs obligatoires</i>"); 
             out.println("</center>"); 
 //>>>>>>> origin/master
             out.println("</body>");
