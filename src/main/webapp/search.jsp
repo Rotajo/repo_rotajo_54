@@ -27,11 +27,11 @@
         %>
         <div class="main_content">
         <form method='POST' action='../ProjetLO54/search'>
-            <p><label>Par titre</label> : <input type='text' name='title'/></p>
+            <p><label>Par titre</label> : <input type='text' name='title' autofocus/></p>
             <p><label>Par date: (jj mm aaaa)</label> : 
-            <input type='text' name='day' size="3"/>
-            &nbsp;<input type='text' name='month' size="3"/>
-            &nbsp;<input type='text' name='year' size="4"/>
+                <input type='text' name='day' size="1" maxlength="2" placeholder="JJ"/>
+            &nbsp;<input type='text' name='month' size="1" maxlength="2" placeholder="MM"/>
+            &nbsp;<input type='text' name='year' size="3" maxlength="4" placeholder="AAAA"/>
             </p>
             <p><label>Par lieu</label> : <select name='location'>
                     <option value="0"></option> 
