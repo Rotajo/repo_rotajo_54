@@ -23,7 +23,7 @@ import lo54.projetlo54.core.repository.LocationDao;
 
 /**
  * Affichage de toutes les tables de la base de données
- * @author Jordan
+ * @author Jordan, Syntiche, Romina
  */
 public class HomeServlet extends HttpServlet {
 
@@ -41,67 +41,66 @@ public class HomeServlet extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         
-        try (PrintWriter out = response.getWriter()) {
+        // Fetching the course, location, client, and session lists
+        List<Course> listCourse = new CourseDao().recupererTout();
+        List<Location> listLocation = new LocationDao().recupererTout();
+        List<CourseSession> listCourseSession = new CourseSessionDao().recupererTout();
+        List<Client> listClient = new ClientDao().recupererTout();
+        
+        //HTML output and form processing
+        try (PrintWriter out = response.getWriter()) {            
             
-            // Récupération des cours
-            CourseDao cd = new CourseDao();
-            List<Course> listCourse = cd.recupererTout();
-            
-            // Récupération des lieux
-            LocationDao ld = new LocationDao();
-            List<Location> listLocation = ld.recupererTout();
-            
-            // Récupération des session de cours
-            CourseSessionDao csd = new CourseSessionDao();
-            List<CourseSession> listCourseSession = csd.recupererTout();
-            
-            // Récupération des étudiants inscrits
-            ClientDao cld = new ClientDao();
-            List<Client> listClient = cld.recupererTout();
-            // =================================================================
-            // en-tête HTML
+            //Header HTML 
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListServlet</title>");            
+            out.println("<title>Inscription aux UV - Catalogue</title>");            
+            out.println("<link rel='stylesheet' href='../ProjetLO54/CSS/style.css' type='text/css' media='screen' />");
             out.println("</head>");
             out.println("<body>");
-            out.println("<div class='wrapper'>");
-            out.println("<br><h1><u>Affichage global</u></h1><br><hr>");  
-            // =================================================================
-            // affichage de la table COURSE
-            out.println("<h3><u><i>Cours disponibles :</i></u></h3>");
-            out.print("<table border=1>");
-            out.print("<tr>");
-            out.print("<th>Code UV</th>");
-            out.print("<th>Titre</th>");
-            out.print("</tr>");
-            for(Course c : listCourse){
-                out.print("<tr>");
-                out.print("<td>"+c.getCode()+"</td>");
-                out.print("<td>"+c.getTitle()+"</td>");
-                out.print("</tr>");
-            }
-            out.print("</table><br>");            
-            // =================================================================
-            // affichage de la table LOCATION
-            out.println("<hr><h3><u><i>Lieux de cours :</i></u></h3>");
-            out.print("<table border=1>");
+            out.println("<div class='title'>");
+            out.println("<a href='../ProjetLO54/index.html'>");
+            out.println("<img class='image' id='head_logo' src='UTBM_Logo.jpg' alt='UTBM Logo'/></a>");
+            out.println("<h1>Inscription aux UV en ligne</h1>");
+            out.println("<h3>PROJET LO54 </h3>");
+            out.println("</div>");
+            // Navigation pane HTML 
+            out.println("<div class='navigation'>");
+            out.println("<ul class='navigation'>");
+            out.println("<li class='navigation'><a href='../ProjetLO54/home'>Accéder aux tables</a></li>");
+            out.println("<li class='navigation'><a href='../ProjetLO54/form'>Inscription</a></li>");
+            out.println("<li class='navigation'><a href='search.jsp'>Rechercher</a></li>");
+            out.println("</ul>");
+            out.println("</div>");
+                        
+            // Page HTML
+            out.println("<div class='main_content'>");
+            
+            // Course table display
+            out.println("<h2>Cours disponibles</h2>");
+            out.println("<table border=1 class='center' >");
+            out.println("<tr>");
+            out.println("<th>Code UV</th>");
+            out.println("<th>Titre</th>");
+            out.println("</tr>");
+            for(Course c : listCourse)
+                out.print("<tr><td>"+c.getCode()+"</td><td>"+c.getTitle()+"</td></tr>");
+            out.print("</table><br>");       
+            
+            // Location table display
+            out.println("<h2>Lieux de cours</h2>");
+            out.print("<table border=1 class='center'>");
             out.print("<tr>");
             out.print("<th>ID Lieu</th>");
             out.print("<th>Ville</th>");
             out.print("</tr>");
-            for(Location l : listLocation){
-                out.print("<tr>");
-                out.print("<td>"+l.getIdLocation()+"</td>");
-                out.print("<td>"+l.getCity()+"</td>");
-                out.print("</tr>");
-            }
+            for(Location l : listLocation)
+                out.print("<tr><td>"+l.getIdLocation()+"</td><td>" + l.getCity() +"</td></tr>");
             out.print("</table><br>");   
-            // =================================================================
-            // affichage de la table COURSE_SESSION
-            out.println("<hr><h3><u><i>Session de cours :</i></u></h3>");
-            out.print("<table border=1>");
+            
+            // Course session display
+            out.println("<h2>Session de cours</h2>");
+            out.print("<table border=1 class='center'>");
             out.print("<tr>");
             out.print("<th>ID session</th>");
             out.print("<th>Code UV</th>");
@@ -113,15 +112,15 @@ public class HomeServlet extends HttpServlet {
                 out.print("<tr>");
                 out.print("<td>"+cs.getIdCourseSession()+"</td>");
                 out.print("<td>"+cs.getCourse().getCode()+"</td>");
-                out.print("<td>"+ld.nomVille(cs.getLocation().getIdLocation())+"</td>");
+                out.print("<td>"+cs.getLocation().getCity()+"</td>");
                 out.print("<td>"+cs.getStartDate()+"</td>");
                 out.print("<td>"+cs.getEndDate()+"</td>");
                 out.print("</tr>");
             }
             out.print("</table><br>"); 
-            // =================================================================
-            // affichage de la table CLIENT
-            out.println("<hr><h3><u><i>Etudiants inscrits :</i></u></h3>");
+            
+            // Client table display
+            out.println("<h2>Etudiants inscrits</h2>");
             out.print("<table border=1>");
             out.print("<tr>");
             out.print("<th>ID Etudiant</th>");
@@ -140,20 +139,16 @@ public class HomeServlet extends HttpServlet {
                 out.print("<td>"+cl.getAddress()+"</td>");
                 out.print("<td>"+cl.getPhone()+"</td>");
                 out.print("<td>"+cl.getEmail()+"</td>");
-                out.print("<td>"+csd.getSession(cl.getCourseSession().getIdCourseSession()).getCourse().getCode()+"</td>");
+                out.print("<td>"+cl.getCourseSession().getCourse().getCode()+"</td>");
                 out.print("</tr>");
             }
             out.print("</table><br>");   
-            // =================================================================
-            // pieds de page HTML
+            
+            // Rest of page HTML
             out.println("</div>");
             out.println("</body>");
             out.println("</html>");
             
-            
-            // afficher le fichier.jsp associé
-            /*this.getServletContext().getRequestDispatcher( "/jsp/HomeJsp.jsp")
-                .forward( request, response );*/
         }
     }
 

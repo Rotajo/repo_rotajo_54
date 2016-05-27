@@ -13,11 +13,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- * Manipulation de la table CourseSession
- * @author Jordan
+ * DAO class: Manipulation de la table CourseSession
+ * @author Jordan, Syntiche, Romina
  */
 public class CourseSessionDao {
     
+    //Blank constructor
     public CourseSessionDao() {
     }
     

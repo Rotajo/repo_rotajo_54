@@ -18,29 +18,56 @@
         <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     </head>
     <body>
+        <div class="title">
+            <a href="index.html">
+                <img class="image" id="head_logo" src="UTBM_Logo.jpg" alt="UTBM Logo"/>
+            </a>
+            <h1>Inscription aux UV en ligne</h1>
+            <h3>PROJET LO54 </h3>            
+        </div>
         
-        <div class="title"> <h1>Recherche liste des formations</h1></div>
+        <div class='navigation'>
+            <ul class='navigation'>
+                <li class='navigation'><a href='../ProjetLO54/home'>Accéder aux tables</a></li>
+                <li class='navigation'><a href='../ProjetLO54/form'>Inscription</a></li>
+                <li class='navigation'><a href='search.jsp'>Rechercher</a></li>
+            </ul>
+        </div>
+        
+        <div class='main_content'>
+        <h2>Recherche liste des formations</h2>
         
         <%
         List<Location> location = new LocationDao().recupererTout();
         request.setAttribute("location", location);
         %>
-        <div class="main_content">
+        
         <form method='POST' action='../ProjetLO54/search'>
-            <p><label>Par titre</label> : <input type='text' name='title'/></p>
-            <p><label>Par date: (jj mm aaaa)</label> : 
-            <input type='text' name='day' size="3"/>
-            &nbsp;<input type='text' name='month' size="3"/>
-            &nbsp;<input type='text' name='year' size="4"/>
-            </p>
-            <p><label>Par lieu</label> : <select name='location'>
-                    <option value="0"></option> 
-                <c:forEach items="${location}" var="location">
-                    <option value="${location.idLocation}"><c:out value="${location.city}" /></option>
-                </c:forEach>
-            </select>
-            </p>
-            <input type='submit' value='Valider'/>
+            <table>
+                <tr>
+                    <td>Par titre</td>
+                    <td><input type='text' name='title' autofocus/></td>
+                </tr>
+                <tr>
+                    <td>Par date (jj mm aaaa)</td>
+                    <td><input type='text' name='day' size="3" maxlength="2" placeholder="JJ"/>
+                        &nbsp;<input type='text' name='month' size="1" maxlength="2" placeholder="MM"/>
+                        &nbsp;<input type='text' name='year' size="3" maxlength="4" placeholder="AAAA"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Par lieu</td>
+                    <td>
+                        <select name='location'>
+                            <option value="0"></option> 
+                            <c:forEach items="${location}" var="location">
+                                <option value="${location.idLocation}"><c:out value="${location.city}" /></option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <p style="text-align:center"><input type='submit' value='Valider'/></p>
         </form>
         </div>
     </body>

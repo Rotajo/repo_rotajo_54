@@ -13,11 +13,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- * Manipulation de la table Client
- * @author Jordan
+ * DAO class: Manipulation de la table Client
+ * @author Jordan, Syntiche, Romina
  */
 public class ClientDao {
     
+    //Blank constructor
     public ClientDao() {
     }
     

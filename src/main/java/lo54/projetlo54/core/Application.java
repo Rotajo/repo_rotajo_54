@@ -13,7 +13,7 @@ import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.entity.Location;
-import lo54.projetlo54.core.repository.FiltresDao;
+import lo54.projetlo54.core.repository.SearchDao;
 import lo54.projetlo54.core.repository.LocationDao;
 import lo54.projetlo54.core.service.LocationService;
 import lo54.projetlo54.core.repository.CourseSessionDao;
@@ -70,7 +70,7 @@ public class Application {
         CourseSession cc : fd.filtreSessions("de", "2015-11-01", 1
  */
         System.out.println("About to check filtres");
-        FiltresDao fd = new FiltresDao();
+        SearchDao fd = new SearchDao();
         for (CourseSession cc : fd.filtreSessions("de", "2015-11-01", 1)){
             System.out.println(cc.getIdCourseSession());
         }

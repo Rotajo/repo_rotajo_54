@@ -8,7 +8,7 @@ package lo54.projetlo54.core.service;
 import java.util.List;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.repository.CourseDao;
-import lo54.projetlo54.core.repository.FiltresDao;
+import lo54.projetlo54.core.repository.SearchDao;
 
 /**
  * Affichage de la table Course
