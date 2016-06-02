@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inscrits" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ceb17302-99c4-422c-8f69-19c5f6108f94">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     concat(client.`LASTNAME`," ",client.`FIRSTNAME`) AS FIRSTNAME,
+     client.`ADDRESS` AS client_ADDRESS,
+     client.`PHONE` AS client_PHONE,
+     client.`EMAIL` AS client_EMAIL,
+     course_session.`START_DATE` AS course_session_START_DATE,
+     course_session.`END_DATE` AS course_session_END_DATE,
+     course_session.`COURSE_CODE` AS course_session_COURSE_CODE,
+     client.`COURSE_SESSION_ID` AS client_COURSE_SESSION_ID,
+     course_session.`ID_COURSE_SESSION` AS course_session_ID_COURSE_SESSION
+FROM
+     `course_session` course_session INNER JOIN `client` client ON course_session.`ID_COURSE_SESSION` = client.`COURSE_SESSION_ID`]]>
+	</queryString>
+	<field name="FIRSTNAME" class="java.lang.String"/>
+	<field name="client_ADDRESS" class="java.lang.String"/>
+	<field name="client_PHONE" class="java.lang.String"/>
+	<field name="client_EMAIL" class="java.lang.String"/>
+	<field name="course_session_START_DATE" class="java.sql.Date"/>
+	<field name="course_session_END_DATE" class="java.sql.Date"/>
+	<field name="course_session_COURSE_CODE" class="java.lang.String"/>
+	<field name="client_COURSE_SESSION_ID" class="java.lang.Integer"/>
+	<field name="course_session_ID_COURSE_SESSION" class="java.lang.Integer"/>
+	<group name="course_session_ID_COURSE_SESSION">
+		<groupExpression><![CDATA[$F{course_session_ID_COURSE_SESSION}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="7" width="555" height="24" forecolor="#B89F7D" backcolor="#FFFFFF" uuid="13d9b7d1-9d6a-44db-bd9e-1c83d49cef02"/>
+					<staticText>
+						<reportElement style="Column header" x="21" y="0" width="61" height="24" forecolor="#000000" uuid="4960f8bc-e34e-42ea-911e-e361470bad18"/>
+						<textElement>
+							<font size="13" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Session]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="82" y="0" width="75" height="24" forecolor="#000000" uuid="ff50a53f-f7ae-4535-908a-b5280cdd2a87"/>
+						<textElement>
+							<font size="13" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{course_session_ID_COURSE_SESSION}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="162" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="95" backcolor="#000000" uuid="d3627c60-a4d9-4779-9166-d769e79a7fd4"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="bf1c7ffd-6409-4f02-806e-755957586044"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Inscrits]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="157" y="66" width="249" height="29" uuid="b07a2aa1-193e-47ad-855f-f8e8fe32142a"/>
+					<textElement>
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[xxx]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="95" width="555" height="19" forecolor="#000000" backcolor="#EF250F" uuid="e9073da2-aec0-4bc1-994f-d2b23087404b"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="323" y="0" width="217" height="19" forecolor="#FFFFFF" uuid="41d793f4-9dca-4c4d-bba3-b0411677b1c7"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="7" width="82" height="18" forecolor="#000000" uuid="146892be-bcf6-4031-b210-3a05e6d94dd0"/>
+				<textElement>
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nom complet	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="111" y="7" width="76" height="18" forecolor="#000000" uuid="4960f8bc-e34e-42ea-911e-e361470bad18"/>
+				<textElement>
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Adresse]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="213" y="7" width="75" height="18" forecolor="#000000" uuid="049dae39-db01-4473-ab01-5cf671b885b6"/>
+				<textElement>
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[N°Portable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="299" y="8" width="61" height="18" forecolor="#000000" uuid="fa483a5a-2aa0-4921-afef-c19e5552f4f1"/>
+				<textElement>
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="431" y="7" width="61" height="18" forecolor="#000000" uuid="672165da-c154-4b81-8d9a-a1342139ba50"/>
+				<textElement>
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Debut]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="494" y="8" width="46" height="18" forecolor="#000000" uuid="855a32f8-0d50-41f9-9294-8c2397c2be52"/>
+				<textElement>
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="385" y="7" width="46" height="18" forecolor="#000000" uuid="25e1af70-1d2f-4892-abcf-0720fe8a7784"/>
+				<textElement>
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Cours]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="43d8e598-7e5a-418d-a999-c7ccfe0428f5"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="111" height="18" uuid="f19211ec-a452-4028-8d8f-ea63df044779"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FIRSTNAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="111" y="0" width="88" height="18" uuid="ccd0013a-34ea-4169-a1a2-3693b73a18eb"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{client_ADDRESS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="213" y="0" width="75" height="18" uuid="a2cd7947-32b1-4f7d-8605-3f590fa738cd"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{client_PHONE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="299" y="0" width="83" height="18" uuid="a16d8101-9cbc-4351-aa1d-b78a293d8e79"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{client_EMAIL}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="494" y="0" width="59" height="18" uuid="0beec30a-b37d-4863-a543-5c923c6fa204"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{course_session_END_DATE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="385" y="0" width="46" height="18" uuid="4cd6ff0e-e8db-4bb0-aa44-c2c02ae1c5bb"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{course_session_COURSE_CODE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="433" y="0" width="59" height="18" uuid="2a52097f-4426-49ea-898b-029f7f034962"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{course_session_START_DATE}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="97e96602-b21e-4dc8-99d8-6149b8545224"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="02cd793e-beee-4d7e-be9b-742eb9a778eb"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="2a96a584-ddf5-413f-8006-a5b17bb42974"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="6781ea14-2fc7-4622-bea5-d4718a760cb6"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="4241058a-84f9-48e8-8158-c09f196bf576"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
