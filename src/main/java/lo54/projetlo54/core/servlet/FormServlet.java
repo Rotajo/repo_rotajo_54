@@ -84,6 +84,7 @@ public class FormServlet extends HttpServlet {
             out.println("<h2>Inscription</h2>");
             // Class registration form  
             out.println("<form method='POST' action='../ProjetLO54/session'>");
+
             out.println("<table >");
             out.println("<tr><td>Nom de famille (*)</td> <td><input type='text' name='lastname'maxlength='30' placeholder='ex : ROBERT' autofocus required/></td></tr>");
             out.println("<tr><td>Prénom (*)</td> <td> <input type='text' name='firstname' maxlength='30' placeholder='ex : Julien' required/></td></tr>");
@@ -91,12 +92,15 @@ public class FormServlet extends HttpServlet {
             out.println("<tr><td>Numéro de téléphone (*)</td> <td> <input type='tel' name='phone' maxlength='15' placeholder='ex : 06 12 34 56 78' required/></td></tr>");
             out.println("<tr><td>Email</td> <td><input type='email' name='email' maxlength='50' placeholder='ex : xxx@yyy.zz'/></td></tr>");
             out.println("</table>");
+
             
+
             // Second half of page
             // Checks if a search was made prior to registration             
             // If a search was made, the selected session will be displayed
             // otherwise, the list of session will be displayed
             if (search){
+
                 CourseSession ses = new CourseSession(csd.getSession(searchID));
                 out.println("<input type='hidden' name='searchID' value='"+ searchID+"'/>");
                 out.println("<p>Vous vous inscrivez a l'UV suivante:</p>");
@@ -110,6 +114,7 @@ public class FormServlet extends HttpServlet {
                 for (CourseSession cc : listCourseSession){
                     out.print("<tr><td><input type='radio' required  name= 'sessionID' value='" + cc.getIdCourseSession() + "'></td><td>" + cc.getCourse().getTitle() + "</td><td>" 
                             + cc.getLocation().getCity()+ "</td><td>"+ cc.getStartDate() + "</td><td>" + cc.getEndDate()+"</td></tr>");
+
                 }
                 out.println("</table>");
             }
