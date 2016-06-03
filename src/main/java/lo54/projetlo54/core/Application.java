@@ -5,19 +5,18 @@
  */
 package lo54.projetlo54.core;
 
-import java.text.DateFormat;
+import java.io.File;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.entity.Location;
-import lo54.projetlo54.core.repository.SearchDao;
-import lo54.projetlo54.core.repository.LocationDao;
-import lo54.projetlo54.core.service.LocationService;
-import lo54.projetlo54.core.repository.CourseSessionDao;
-import lo54.projetlo54.core.service.ClientService;
+import lo54.projetlo54.core.util.HibernateUtil;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 /**
  * Actions sur la base de données (tests)
  * @author Jordan
@@ -68,12 +67,26 @@ public class Application {
         System.out.println("Nom de la ville de code 1 = " + ld.nomVille(1));
         
         CourseSession cc : fd.filtreSessions("de", "2015-11-01", 1
- */
+ 
         System.out.println("About to check filtres");
         SearchDao fd = new SearchDao();
         for (CourseSession cc : fd.filtreSessions("de", "2015-11-01", 1)){
             System.out.println(cc.getIdCourseSession());
+        }*/
+        
+        //CourseSessionDao csd = new CourseSessionDao();
+     
+        try{
+            JasperReport jasperReport = (JasperReport)JRLoader.loadObject(new File("../reports/Inscrits.jasper"));   
+            JasperFillManager.fillReportToFile(jasperReport, "Inscrits", null , (JRDataSource) HibernateUtil.getSessionFactory().openSession());
+            JasperExportManager.exportReportToPdfFile("Inscrits.jrprint");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("This didn't work");
         }
+        
+        
+        
         
 
        

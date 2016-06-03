@@ -23,9 +23,13 @@
      course_session.`END_DATE` AS course_session_END_DATE,
      course_session.`COURSE_CODE` AS course_session_COURSE_CODE,
      client.`COURSE_SESSION_ID` AS client_COURSE_SESSION_ID,
-     course_session.`ID_COURSE_SESSION` AS course_session_ID_COURSE_SESSION
+     course_session.`ID_COURSE_SESSION` AS course_session_ID_COURSE_SESSION,
+course.TITLE as course_TITLE
 FROM
-     `course_session` course_session INNER JOIN `client` client ON course_session.`ID_COURSE_SESSION` = client.`COURSE_SESSION_ID`]]>
+     `course_session` course_session INNER JOIN `client` client ON course_session.`ID_COURSE_SESSION` = client.`COURSE_SESSION_ID`
+INNER JOIN `course` course ON course_session.`COURSE_CODE` = course.`CODE`
+
+]]>
 	</queryString>
 	<field name="FIRSTNAME" class="java.lang.String"/>
 	<field name="client_ADDRESS" class="java.lang.String"/>
@@ -55,6 +59,10 @@ FROM
 							<font size="13" isBold="true"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{course_session_ID_COURSE_SESSION}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="157" y="0" width="100" height="20" uuid="a81db07f-c2a9-4e0b-b063-f05a473b1c40"/>
+						<textFieldExpression><![CDATA[$F{course_session_COURSE_CODE}]]></textFieldExpression>
 					</textField>
 				</frame>
 			</band>
