@@ -5,18 +5,21 @@
  */
 package lo54.projetlo54.core;
 
-import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.text.ParseException;
 import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.entity.Location;
-import lo54.projetlo54.core.util.HibernateUtil;
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 /**
  * Actions sur la base de données (tests)
  * @author Jordan
@@ -75,17 +78,40 @@ public class Application {
         }*/
         
         //CourseSessionDao csd = new CourseSessionDao();
+        
+       /* File file = new File("src/main/java/lo54/projetlo54/core/Inscrits.jasper");
+        //C:\Users\Syntiche\Desktop\Utbm\ProjetLO/54\src\main\java\lo54\projetlo54\core\Inscrits.jasper
+        System.out.println("This is the location of the file: " + file.getAbsolutePath());
+        if (file.exists()){
+            System.out.println("This file exists and nothing makes sense, I should choose another career choice");
+        } else {
+            System.out.println("The file doesn't exists, which still sucks cause idk why the error but at least, yay consistency");
+        }
+        
+        File testFile = new File("");
+        String currentPath = testFile.getAbsolutePath();
+        System.out.println("current path is: " + currentPath);
      
+        
+        
         try{
-            JasperReport jasperReport = (JasperReport)JRLoader.loadObject(new File("../reports/Inscrits.jasper"));   
-            JasperFillManager.fillReportToFile(jasperReport, "Inscrits", null , (JRDataSource) HibernateUtil.getSessionFactory().openSession());
-            JasperExportManager.exportReportToPdfFile("Inscrits.jrprint");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lo54?zeroDateTimeBehavior=convertToNull", "root", "password");
+            JasperReport jasperReport = (JasperReport)JRLoader.loadObjectFromFile("src/main/java/lo54/projetlo54/core/Inscrits.jasper");   
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null ,con );
+            //JasperExportManager.exportReportToPdfFile("Inscrits.jrprint");
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(System.out));
+            SimplePdfExporterConfiguration configuration = new SimplePdfExporterConfiguration();
+            configuration.setMetadataAuthor("Petter"); //Set your pdf configurations, 
+            exporter.setConfiguration(configuration);
+            exporter.exportReport();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("This didn't work");
         }
         
-        
+        */
         
         
 

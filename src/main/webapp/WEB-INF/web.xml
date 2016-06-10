@@ -18,6 +18,10 @@
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>lo54.projetlo54.core.servlet.SearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PrintingServlet</servlet-name>
+        <servlet-class>lo54.projetlo54.core.servlet.PrintingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -34,6 +38,10 @@
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrintingServlet</servlet-name>
+        <url-pattern>/print</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

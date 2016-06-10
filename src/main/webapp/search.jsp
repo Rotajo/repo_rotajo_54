@@ -31,6 +31,7 @@
                 <li class='navigation'><a href='../ProjetLO54/home'>Accéder aux tables</a></li>
                 <li class='navigation'><a href='../ProjetLO54/form'>Inscription</a></li>
                 <li class='navigation'><a href='search.jsp'>Rechercher</a></li>
+                <li class='navigation'><a href='../ProjetLO54/print'>Imprimer liste des etudiants inscrits</a></li>
             </ul>
         </div>
         
