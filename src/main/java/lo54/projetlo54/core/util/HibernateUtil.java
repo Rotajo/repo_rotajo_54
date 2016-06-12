@@ -1,11 +1,12 @@
-/*
- * @author Jordan
- */
 package lo54.projetlo54.core.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/*
+ * HibernateUtile Class
+ * @author Jordan, Syntiche, Romina
+ */
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();

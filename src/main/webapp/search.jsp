@@ -1,8 +1,4 @@
-<%-- 
-    Document   : filtre
-    Created on : May 20, 2016, 6:30:41 PM
-    Author     : Syntiche
---%>
+<%-- @author Jordan, Syntiche, Romina --%>
 
 <%@page import="lo54.projetlo54.core.repository.LocationDao"%>
 <%@page import="lo54.projetlo54.core.entity.Location"%>
@@ -26,23 +22,26 @@
             <h3>PROJET LO54 </h3>            
         </div>
         
+        <!-- Navigation pane -->
         <div class='navigation'>
             <ul class='navigation'>
                 <li class='navigation'><a href='../ProjetLO54/home'>Accéder aux tables</a></li>
                 <li class='navigation'><a href='../ProjetLO54/form'>Inscription</a></li>
                 <li class='navigation'><a href='search.jsp'>Rechercher</a></li>
-                <li class='navigation'><a href='../ProjetLO54/print'>Imprimer liste des etudiants inscrits</a></li>
+                <li class='navigation'><a href='../ProjetLO54/print'>Enregistrer la liste des étudiants inscrits</a></li>
             </ul>
         </div>
         
         <div class='main_content'>
-        <h2>Recherche liste des formations</h2>
+        <h2>Rechercher une formation</h2>
         
+        <!-- Collect the list of locations -->
         <%
         List<Location> location = new LocationDao().recupererTout();
         request.setAttribute("location", location);
         %>
         
+        <!-- Search form -->
         <form method='POST' action='../ProjetLO54/search'>
             <table>
                 <tr>
@@ -57,6 +56,7 @@
                     </td>
                 </tr>
                 <tr>
+                    <!-- Dropdown list of locations -->
                     <td>Par lieu</td>
                     <td>
                         <select name='location'>

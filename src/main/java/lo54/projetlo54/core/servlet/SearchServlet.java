@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.servlet;
 
 import java.io.IOException;
@@ -13,9 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lo54.projetlo54.core.entity.CourseSession;
-import lo54.projetlo54.core.entity.Location;
 import lo54.projetlo54.core.repository.SearchDao;
-import lo54.projetlo54.core.repository.LocationDao;
+import lo54.projetlo54.core.service.DisplayService;
 
 /**
  * Processes the search paramemter for session and displays the results
@@ -36,6 +30,9 @@ public class SearchServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
         response.setContentType("text/html;charset=UTF-8");
+        
+        // Display class
+        DisplayService display = new DisplayService();
         
         //Verifies if the title search parameters is empty 
         //to correctly format it for HQL use
@@ -64,38 +61,23 @@ public class SearchServlet extends HttpServlet {
         //HTML output and form processing
         try (PrintWriter out = response.getWriter()) {
             
-            //Header HTML
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Inscription aux UV - Catalogue</title>");            
-            out.println("<link rel='stylesheet' href='../ProjetLO54/CSS/style.css' type='text/css' media='screen' />");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<div class='title'>");
-            out.println("<a href='../ProjetLO54/index.html'>");
-            out.println("<img class='image' id='head_logo' src='UTBM_Logo.jpg' alt='UTBM Logo'/></a>");
-            out.println("<h1>Inscription aux UV en ligne</h1>");
-            out.println("<h3>PROJET LO54 </h3>");
-            out.println("</div>");
-            // Navigation pane HTML 
-            out.println("<div class='navigation'>");
-            out.println("<ul class='navigation'>");
-            out.println("<li class='navigation'><a href='../ProjetLO54/home'>Accéder aux tables</a></li>");
-            out.println("<li class='navigation'><a href='../ProjetLO54/form'>Inscription</a></li>");
-            out.println("<li class='navigation'><a href='search.jsp'>Rechercher</a></li>");
-            out.println("</ul>");
-            out.println("</div>");
+            //Header HTML 
+            out.print(display.header());
+            
+            //Navigation pane HTML 
+            out.print(display.navigation());
 
             // Page HTML
             out.println("<div class='main_content'>");
             out.println("<h2>Résultats</h2>");
+            
             // Checks if there are any results
             // If no result, user is notify that there are no session corresponding to parameters
             // Otherwise, results are displayed
             if (courseList == null || courseList.isEmpty()){
-                out.print("<p>Il n'existe pas de formations qui correspondent a vos criteres");
-            } else {
+                out.print("<p>Désolé. Il n'existe pas de formations qui correspondent a vos critères.");
+            } 
+            else {
                 out.println("<table >");
                 out.println("<form method='POST' action='../ProjetLO54/form'>");
                 out.println("<th></th><th>UV</th><th>Campus</th><th>Date debut</th><th>Date fin</th>");
@@ -108,12 +90,14 @@ public class SearchServlet extends HttpServlet {
                 out.println("</form>");
                 out.println("</div>");
             }
-        } catch (Exception e){
+            
+            // Rest of page HTML
+            out.print(display.restPage());
+        } 
+        catch (Exception e){
             e.printStackTrace();
         }
-    }
-  
-
+    } //End of "processRequest"
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -154,4 +138,4 @@ public class SearchServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+} //End of class

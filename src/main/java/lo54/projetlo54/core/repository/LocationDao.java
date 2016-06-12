@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.repository;
 
 import java.util.List;
@@ -13,8 +8,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- * Manipulation de la table Localisation
- * @author Jordan
+ * DAO class: handling Location table
+ * @author Jordan, Syntiche, Romina
  */
 public class LocationDao {
     
@@ -22,47 +17,47 @@ public class LocationDao {
     }
     
     /**
-     * Ajout d'un lieu
+     * Add location
      * @param l location
      */
     public void ajouter(Location l) {
-        // connexion à la base de données
+        //Connection to database
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         try {
-            session.beginTransaction();         // début de transaction
-            session.persist(l);                 // ajout
-            session.getTransaction().commit();  // validation
+            session.beginTransaction();         //Begin transaction
+            session.persist(l);                 //Add Location
+            session.getTransaction().commit();  //Validation
             
         } catch (HibernateException he) {
             he.printStackTrace();
             if(session.getTransaction() != null) { 
                 try {
-                    session.getTransaction().rollback();    // retour
+                    session.getTransaction().rollback(); //Undo
                 }catch(HibernateException he2) {he2.printStackTrace(); }
             }
             
         } finally {
             if(session != null) 
-                session.close();    // fermeture de session
+                session.close(); //Close session
         }
-    }
+    } //End of "ajouter"
     
     /**
-     * Récupère toute la table Location
-     * @return la liste de récupération de toute la table
+     * Collect Location table
+     * @return list of the whole table
      */
     public List<Location> recupererTout() {
         
-        List<Location> l = null;     // liste de récupération
+        List<Location> l = null; //Location list
         
-        // connexion à la base de données
+        //Connection to database
         Session session = HibernateUtil.getSessionFactory().openSession();
                
         try {
-            session.beginTransaction();         // début de transaction
+            session.beginTransaction(); //Begin transaction
             
-            // récupère toute la table Location
+            //Collecting request
             Query query = session.createQuery("from Location");
             l = query.list();
                         
@@ -70,18 +65,16 @@ public class LocationDao {
             he.printStackTrace();
             if(session.getTransaction() != null) { 
                 try {
-                    session.getTransaction().rollback();	
+                    session.getTransaction().rollback(); //Undo	
                 }catch(HibernateException he2) {he2.printStackTrace(); }
             }
             
         } finally {
             if(session != null) 
-                session.close();
+                session.close(); //Close session
         }
         
         return l;
-    }
+    } //End of "recupererTout"
     
-    
-    
-} // fin de classe LocationDao
+} //End of Class

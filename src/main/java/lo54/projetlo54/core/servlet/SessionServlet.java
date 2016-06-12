@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.servlet;
 
 import java.io.IOException;
@@ -12,15 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import lo54.projetlo54.core.entity.Client;
-import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
-import lo54.projetlo54.core.entity.Location;
 import lo54.projetlo54.core.repository.ClientDao;
-import lo54.projetlo54.core.repository.CourseDao;
 import lo54.projetlo54.core.repository.CourseSessionDao;
-import lo54.projetlo54.core.repository.LocationDao;
+import lo54.projetlo54.core.service.DisplayService;
 
 /**
  * Process registration form, adds student to session, and display changes made
@@ -41,6 +32,9 @@ public class SessionServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
+        
+        //Display class
+        DisplayService display = new DisplayService();
         
         // Variable used to hold the id of course selected 
         Integer id = null;
@@ -75,35 +69,18 @@ public class SessionServlet extends HttpServlet {
         //HTML output and form processing
         try (PrintWriter out = response.getWriter()) {
             
-            //Header HTML
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Inscription</title>");     
-            out.println("<link rel='stylesheet' href='../ProjetLO54/CSS/style.css' type='text/css' media='screen' />");
-            out.println("</head>");
-            out.println("<body>");            
-            out.println("<div class='title'>");
-            out.println("<a href='../ProjetLO54/index.html'>");
-            out.println("<img class='image' id='head_logo' src='UTBM_Logo.jpg' alt='UTBM Logo'/></a>");
-            out.println("<h1>Inscription aux UV en ligne</h1>");
-            out.println("<h3>PROJET LO54 </h3>");
-            out.println("</div>");
-            // Navigation pane HTML
-            out.println("<div class='navigation'>");
-            out.println("<ul class='navigation'>");
-            out.println("<li class='navigation'><a href='../ProjetLO54/home'>Accéder aux tables</a></li>");
-            out.println("<li class='navigation'><a href='../ProjetLO54/form'>Inscription</a></li>");
-            out.println("<li class='navigation'><a href='search.jsp'>Rechercher</a></li>");
-            out.println("</ul>");
-            out.println("</div>");
+            //Header HTML 
+            out.print(display.header());
+            
+            //Navigation pane HTML 
+            out.print(display.navigation());
             
             // Page HTML
             out.println("<div class='main_content'>");
             out.println("<h2>Session de cours et étudiants inscrits</h2>");  
             
             // Displays registration information entered in the DB          
-            out.println("<h3>Vos coordonnées :</h3>"); 
+            out.println("<h3><u>Vos coordonnées :</u></h3>"); 
             out.println("<table>");
             out.println("<tr><td><b>Nom de famille </b><br></td> <td>"+request.getParameter("firstname")+"</td></tr>");
             out.println("<tr><td><b>Prénom </b><br></td> <td>"+request.getParameter("lastname")+"</td></tr>");
@@ -113,7 +90,7 @@ public class SessionServlet extends HttpServlet {
             out.println("</table>");
             
             //Displays the session selected by the user
-            out.println("<h3>Vous avez choisi la session :</h3>");
+            out.println("<h3><u>Vous avez choisi la session :</u></h3>");
             out.print("<table border=1 class='center'>");
             out.print("<tr>");
             out.print("<th>ID session</th><th>Code UV</th><th>Titre</th><th>Ville</th><th>Date Début</th><th>Date Fin</th></tr>");
@@ -141,11 +118,12 @@ public class SessionServlet extends HttpServlet {
                 out.print("<td>"+cl.getEmail()+"</td>");
                 out.print("</tr>");
             }
-            out.print("</table><br>");   
-            out.println("</body>");
-            out.println("</html>");
+            out.print("</table><br>"); 
+            
+            // Rest of page HTML
+            out.print(display.restPage());
         }
-    }
+    } //End of "processRequest"
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -186,4 +164,4 @@ public class SessionServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+} //End of Class

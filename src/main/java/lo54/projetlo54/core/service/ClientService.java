@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.service;
 
 import java.util.List;
@@ -10,27 +5,38 @@ import lo54.projetlo54.core.entity.Client;
 import lo54.projetlo54.core.repository.ClientDao;
 
 /**
- * Affichage de la table Client
- * @author Jordan
+ * Display Client table
+ * @author Jordan, Syntiche, Romina
  */
 public class ClientService {
     
-    List<Client> l;
-
+    //Blank constructor
     public ClientService() {
     }
 
     /**
-     * Affichage entière de la table Client
-     * @author Jordan
+     * Display the whole Client table
+     * @return table
      */
-    public void affichageTableEntiere(){
+    public String affichageTableEntiere(){
         
-        ClientDao cd = new ClientDao();
+        ClientDao cd = new ClientDao();     
+        List<Client> l = cd.recupererTout(); //Client list
+        String s = ""; //Display in servlet
         
-        l = cd.recupererTout();
-           
-        for(Client cc : l)
-            System.out.println(cc.toString());   
-    }
-}
+        for(Client cc : l){
+            s+="<tr>"
+             +"<td>"+cc.getIdClient()+"</td>"
+             +"<td>"+cc.getLastname()+"</td>"
+             +"<td>"+cc.getFirstname()+"</td>"
+             +"<td>"+cc.getAddress()+"</td>"
+             +"<td>"+cc.getPhone()+"</td>"
+             +"<td>"+cc.getEmail()+"</td>"
+             +"<td>"+cc.getCourseSession().getCourse().getCode()+"</td>"
+             +"</tr>";
+        }
+        
+        return s;
+    } //End of "affichageTableEntiere"
+    
+} //End of Class

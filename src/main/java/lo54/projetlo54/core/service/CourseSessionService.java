@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.service;
 
 import java.util.List;
@@ -10,28 +5,36 @@ import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.repository.CourseSessionDao;
 
 /**
- * Affichage de la table CourseSession
- * @author Jordan
+ * Display CourseSession table
+ * @author Jordan, Syntiche, Romina
  */
 public class CourseSessionService {
     
-    List<CourseSession> l;
-
+    //Blank constructor
     public CourseSessionService() {
     }
     
     /*
-     * Affichage entière de la table CourseSession
-     * @author Jordan
+     * Display the whole CourseSession table
+     * @return table
      */
-    public void affichageTableEntiere(){
+    public String affichageTableEntiere(){
         
-        CourseSessionDao ld = new CourseSessionDao();
+        CourseSessionDao cd = new CourseSessionDao();     
+        List<CourseSession> l = cd.recupererTout(); //CourseSession list
+        String s = ""; //Display in servlet
         
-        l = ld.recupererTout();
+        for(CourseSession cs : l){
+            s+="<tr>"
+             +"<td>"+cs.getIdCourseSession()+"</td>"
+             +"<td>"+cs.getCourse().getCode()+"</td>"
+             +"<td>"+cs.getLocation().getCity()+"</td>"
+             +"<td>"+cs.getStartDate()+"</td>"
+             +"<td>"+cs.getEndDate()+"</td>"
+             +"</tr>";
+        }
         
-        for(CourseSession c : l)
-            System.out.println(c.toString());
+        return s;
+    } //End of "affichageTableEntiere"
     
-    }
-}
+} //End of Class

@@ -47,6 +47,6 @@ public class Location  implements java.io.Serializable {
         return "Location{" + "idLocation=" + idLocation + ", city=" + city + '}';
     }
 
-}
+} //End of Class
 
 

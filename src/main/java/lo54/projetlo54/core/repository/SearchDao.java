@@ -1,20 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.repository;
 
 import java.util.List;
-import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.entity.CourseSession;
 import lo54.projetlo54.core.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
- *
- * @author Syntiche
+ * DAO class: search course session from data forms
+ * @author Jordan, Syntiche, Romina
  */
 public class SearchDao {
     
@@ -23,17 +17,19 @@ public class SearchDao {
     }
     
     /**
-     * Selection d'une session basé sur les paramètres donnés
+     * Filter sessions from data parameters (come from forms)
      * @param title String
      * @param date String
      * @param location int
      */
     public List<CourseSession> filtreSessions(String title, String date, int location){
-        List<CourseSession> result = null;
+        List<CourseSession> result = null; //result of the filter
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
-            session.beginTransaction();
+            session.beginTransaction(); // Begin transaction
+            
+            //Collecting request
             result = session.createQuery("FROM CourseSession p WHERE p.course.title LIKE :titre OR (p.startDate < :date AND p.endDate > :date) OR p.location = :id")
                 .setString("titre", title)
                 .setString("date", date)
@@ -43,19 +39,18 @@ public class SearchDao {
             e.printStackTrace();
             if (session.getTransaction() != null){
                 try{
-                    session.getTransaction().rollback();
+                    session.getTransaction().rollback(); //Undo
                 } catch (HibernateException e1){}
             }
         } finally {
             if (session != null){
-                session.close();
+                session.close(); //Close session
             }
         }
         return result;
-    }
-    
-    
-}
+    } //End of "filtreSessions"
+        
+} //End of Class
     
     
    

@@ -9,7 +9,7 @@ import java.util.Set;
  * - what course is held
  * - where is it held
  * - when does it begin and end
- * @author Jordan 
+ * @author Jordan, Syntiche, Romina
  */
 public class CourseSession  implements java.io.Serializable {
 
@@ -26,8 +26,8 @@ public class CourseSession  implements java.io.Serializable {
     }
     
     /**Constructor initialising the date attributes
-     * @param s
-     * @param e 
+     * @param s, startDate
+     * @param e, endDate
      */
     public CourseSession(Date s, Date e) {
         startDate = s;
@@ -35,11 +35,11 @@ public class CourseSession  implements java.io.Serializable {
     }
 	
     /**Constructor initialising all attributes     * 
-     * @param c
-     * @param l
-     * @param s
-     * @param e
-     * @param cl 
+     * @param c, course
+     * @param l, location
+     * @param s, startDate
+     * @param e, endDate
+     * @param cl, clients
      */
     public CourseSession(Course c, Location l, Date s, Date e, Set cl) {
        course = c;
@@ -50,10 +50,10 @@ public class CourseSession  implements java.io.Serializable {
     }
     
     /**Constructor initializing a session without any clients
-     * @param c
-     * @param l
-     * @param s
-     * @param e 
+     * @param c, course
+     * @param l, location
+     * @param s, startDate
+     * @param e, endDate
      */
     public CourseSession(Course c, Location l, Date s, Date e) {
        course = c;
@@ -121,9 +121,6 @@ public class CourseSession  implements java.io.Serializable {
         return "CourseSession{" + "idCourseSession=" + idCourseSession + ", course=" + course.getCode() + ", location=" + location.getIdLocation() + ", startDate=" + startDate + ", endDate=" + endDate + '}';
     }
 
-
-
-
-}
+} //End of Class
 
 

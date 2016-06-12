@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.repository;
 
 import java.util.List;
@@ -13,7 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- * DAO class: Manipulation de la table Course
+ * DAO class: handling Course table
  * @author Jordan, Syntiche, Romina
  */
 public class CourseDao {
@@ -23,49 +18,47 @@ public class CourseDao {
     }
     
     /**
-     * Ajout d'un cours
-     * @param c 
-     * @author Jordan
+     * Add course
+     * @param c, course
      */
     public void ajouter(Course c) {
-        // connexion à la base de données
+        //Connection to database
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         try {
-            session.beginTransaction();         // début de transaction
-            session.persist(c);                 // ajout
-            session.getTransaction().commit();  // validation
+            session.beginTransaction();         //Begin transaction
+            session.persist(c);                 //Add course
+            session.getTransaction().commit();  //Validation
             
         } catch (HibernateException he) {
             he.printStackTrace();
             if(session.getTransaction() != null) { 
                 try {
-                    session.getTransaction().rollback();    // retour
+                    session.getTransaction().rollback(); //Undo
                 }catch(HibernateException he2) {he2.printStackTrace(); }
             }
             
         } finally {
             if(session != null) 
-                session.close();    // fermeture de session
+                session.close(); //Close session
         }
     }
     
     /**
-     * Récupère toute la table Course
-     * @return la liste de récupération de toute la table
-     * @author Jordan
+     * Collect Course table
+     * @return list of the whole table
      */
     public List<Course> recupererTout() {
         
-        List<Course> l = null;     // liste de récupération
+        List<Course> l = null;     //Course list
         
-        // connexion à la base de données
+        //Connection to database
         Session session = HibernateUtil.getSessionFactory().openSession();
                
         try {
-            session.beginTransaction();         // début de transaction
+            session.beginTransaction();         //Begin transaction
             
-            // récupère toute la table Course
+            //Collecting request
             Query query = session.createQuery("from Course");
             l = query.list();
                         
@@ -79,28 +72,28 @@ public class CourseDao {
             
         } finally {
             if(session != null) 
-                session.close();
+                session.close(); //Close session
         }
         
         return l;
-    }
+    } //End of "recupererTout"
     
     /**
-     * Récupération d'un cours
-     * @param codeCourse  CODE de la table Course
-     * @return le cours
+     * Collect a course from code
+     * @param codeCourse, Course code (=ID)
+     * @return the course
      */
     public Course getCourse(String codeCourse)
     {
         Course cs = null;
         
-        // connexion à la base de données
+        //Connection to database
         Session session = HibernateUtil.getSessionFactory().openSession();
                
         try {
-            session.beginTransaction();         // début de transaction
+            session.beginTransaction(); //Begin transaction
             
-            // récupère la ligne souhaitée de la table Location
+            //Collecting request
             Query query = session.createQuery("from Course where code = :code");
             query.setParameter("code", codeCourse);
             cs = (Course) query.uniqueResult();
@@ -110,16 +103,16 @@ public class CourseDao {
             he.printStackTrace();
             if(session.getTransaction() != null) { 
                 try {
-                    session.getTransaction().rollback();	
+                    session.getTransaction().rollback(); //Undo
                 }catch(HibernateException he2) {he2.printStackTrace(); }
             }
             
         } finally {
             if(session != null) 
-                session.close();
+                session.close(); //Close session
         }
         
         return cs;
     }
     
-} // fin de classe ClientDao
+} //End of Class

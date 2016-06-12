@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.service;
 
 import java.util.List;
@@ -10,28 +5,32 @@ import lo54.projetlo54.core.entity.Location;
 import lo54.projetlo54.core.repository.LocationDao;
 
 /**
- * Affichage de la table Location
- * @author Jordan
+ * Display Location table
+ * @author Jordan, Syntiche, Romina
  */
 public class LocationService {
     
-    List<Location> l;
-
+    //Blank constructor
     public LocationService() {
     }
     
     /*
-     * Affichage entière de la table Location
-     * @author Jordan
+     * Display the whole CourseSession table
+     * @return table
      */
-    public void affichageTableEntiere(){
+    public String affichageTableEntiere(){
         
-        LocationDao ld = new LocationDao();
-        
-        l = ld.recupererTout();
-        
-        for(Location ll : l)
-            System.out.println(ll.toString());
+        LocationDao ld = new LocationDao();     
+        List<Location> ll = ld.recupererTout(); //CourseSession list
+        String s = ""; //Display in servlet
+                
+        for(Location l : ll){
+            s+="<tr><td>"+l.getIdLocation()
+             +"</td><td>" + l.getCity()
+             +"</td></tr>";
+        }
+
+        return s;
+    } //End of "affichageTableEntiere"
     
-    }
-}
+} //End of Class

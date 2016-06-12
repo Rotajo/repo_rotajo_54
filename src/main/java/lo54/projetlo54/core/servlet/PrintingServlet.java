@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.servlet;
 
 import java.io.File;
@@ -17,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -25,8 +19,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 
 /**
- *
- * @author Syntiche
+ * Print into PDF the list of clients grouped by session course
+ * @author Jordan, Syntiche, Romina
  */
 public class PrintingServlet extends HttpServlet {
 
@@ -41,32 +35,28 @@ public class PrintingServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Set the content type and the name of the pdf file
         response.setContentType("application/x-pdf");
         response.setHeader("Content-disposition", "inline; filename=Inscrits.pdf");
         
          try{
-            String path = getServletContext().getRealPath("/WEB-INF/Inscrits.jrxml");
+            String path = getServletContext().getRealPath("/WEB-INF/Inscrits.jrxml"); //Path to the file corresponding to the report shape
             File file = new File(path);
-            System.out.println("This is the path: " + path);
-            System.out.println("current path is: " + file.getAbsolutePath());
             OutputStream outputStream = response.getOutputStream();
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lo54?zeroDateTimeBehavior=convertToNull", "root", "password");
             InputStream input = new FileInputStream(file);
-            JasperReport jasperReport = JasperCompileManager.compileReport(input);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(), con);
-            JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+            JasperReport jasperReport = JasperCompileManager.compileReport(input); //Compile le jrxml file
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(), con); //Connect the report and database
+            JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream); //Export in PDF
             
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("This didn't work");
         }
-         
-
       
-    }
+    } //End of "processRequest"
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -105,4 +95,4 @@ public class PrintingServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+} //End of Class

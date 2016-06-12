@@ -1,40 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.service;
 
 import java.util.List;
 import lo54.projetlo54.core.entity.Course;
 import lo54.projetlo54.core.repository.CourseDao;
-import lo54.projetlo54.core.repository.SearchDao;
 
 /**
- * Affichage de la table Course
- * @author Jordan
+ * Display CourseSession table
+ * @author Jordan, Syntiche, Romina
  */
 public class CourseService {
     
-    List<Course> l;
-
+    //Blank constructor
     public CourseService() {
     }
 
     /**
-     * Affichage entière de la table Course
-     * @author Jordan
+     * Display the whole Client table
+     * @return table
      */
-    public void affichageTableEntiere(){
+    public String affichageTableEntiere(){
         
-        CourseDao cd = new CourseDao();
+        CourseDao cd = new CourseDao();     
+        List<Course> l = cd.recupererTout(); //Course list
+        String s = ""; //Display in servlet
         
-        l = cd.recupererTout();
-        
-        for(Course cc : l)
-            System.out.println(cc.toString());
+        for(Course c : l){
+            s+="<tr><td>"+c.getCode()
+             +"</td><td>"+c.getTitle()
+             +"</td></tr>";
+        }
     
-    }
+        return s;
+    } //End of "affichageTableEntiere"
     
-    
-}
+} //End of Class

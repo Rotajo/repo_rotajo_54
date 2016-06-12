@@ -21,10 +21,10 @@ public class Client implements java.io.Serializable {
     }
 	
     /**Constructor initializing attributes with the exception of the student's selected class session
-     * @param l
-     * @param f
-     * @param a
-     * @param p 
+     * @param l, lastname
+     * @param f, firstname
+     * @param a, address
+     * @param p, phone
      */
     public Client(String l, String f, String a, String p) {
         lastname = l;
@@ -34,12 +34,12 @@ public class Client implements java.io.Serializable {
     }
     
     /**Constructor initliazing all necessary attributes
-     * @param c
-     * @param l
-     * @param f
-     * @param a
-     * @param p
-     * @param e 
+     * @param c, courseSession
+     * @param l, lastname
+     * @param f, firstname
+     * @param a, address
+     * @param p, phone
+     * @param e, email
      */
     public Client(CourseSession c, String l, String f, String a, String p, String e) {
        courseSession = c;
@@ -107,6 +107,6 @@ public class Client implements java.io.Serializable {
         return "Client{" + "idClient=" + idClient + ", lastname=" + lastname + ", firstname=" + firstname + ", address=" + address + ", phone=" + phone + ", email=" + email + ", courseSession=" + courseSession.getIdCourseSession() + '}';
     }
 
-}
+} //End of Class
 
 

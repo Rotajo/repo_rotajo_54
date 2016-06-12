@@ -18,8 +18,8 @@ public class Course  implements java.io.Serializable {
     }
 	
     /**Constructor initializing code and title attributes
-     * @param c
-     * @param t 
+     * @param c, code
+     * @param t, title
      */
     public Course(String c, String t) {
         code = c;
@@ -27,9 +27,9 @@ public class Course  implements java.io.Serializable {
     }
     
     /**Constructor initializing all attributes 
-     * @param c
-     * @param t
-     * @param cs 
+     * @param c, code
+     * @param t, title
+     * @param cs, courseSessions
      */
     public Course(String c, String t, Set cs) {
        code = c;
@@ -66,6 +66,6 @@ public class Course  implements java.io.Serializable {
         return "Course{" + "code=" + code + ", title=" + title + '}';
     }
 
-}
+} //End of Class
 
 
