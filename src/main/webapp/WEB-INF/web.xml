@@ -23,8 +23,8 @@
         <servlet-class>lo54.projetlo54.core.servlet.PrintingServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchForm</servlet-name>
-        <servlet-class>lo54.projetlo54.core.servlet.SearchForm</servlet-class>
+        <servlet-name>SearchFormServlet</servlet-name>
+        <servlet-class>lo54.projetlo54.core.servlet.SearchFormServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -48,7 +48,7 @@
         <url-pattern>/print</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SearchForm</servlet-name>
+        <servlet-name>SearchFormServlet</servlet-name>
         <url-pattern>/sform</url-pattern>
     </servlet-mapping>
     <session-config>

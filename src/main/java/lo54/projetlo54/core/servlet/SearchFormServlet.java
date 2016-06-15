@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lo54.projetlo54.core.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,13 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lo54.projetlo54.core.entity.Location;
 import lo54.projetlo54.core.repository.LocationDao;
-import lo54.projetlo54.core.service.DisplayService;
 
 /**
- *
- * @author Syntiche
+ * Search servlet which redirect to search.jsp
+ * @author Jordan, Syntiche, Romina
  */
-public class SearchForm extends HttpServlet {
+public class SearchFormServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
