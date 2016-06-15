@@ -27,20 +27,14 @@
             <ul class='navigation'>
                 <li class='navigation'><a href='../ProjetLO54/home'>Accéder aux tables</a></li>
                 <li class='navigation'><a href='../ProjetLO54/form'>Inscription</a></li>
-                <li class='navigation'><a href='search.jsp'>Rechercher</a></li>
+                <li class='navigation'><a href='../ProjectLO54/sform'>Rechercher</a></li>
                 <li class='navigation'><a href='../ProjetLO54/print'>Enregistrer la liste des étudiants inscrits</a></li>
             </ul>
         </div>
         
         <div class='main_content'>
         <h2>Rechercher une formation</h2>
-        
-        <!-- Collect the list of locations -->
-        <%
-        List<Location> location = new LocationDao().recupererTout();
-        request.setAttribute("location", location);
-        %>
-        
+                
         <!-- Search form -->
         <form method='POST' action='../ProjetLO54/search'>
             <table>

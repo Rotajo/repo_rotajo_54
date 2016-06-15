@@ -43,7 +43,7 @@ public class DisplayService {
          +"<ul class='navigation'>"
          +"<li class='navigation'><a href='../ProjetLO54/home'>Accéder aux tables</a></li>"
          +"<li class='navigation'><a href='../ProjetLO54/form'>Inscription</a></li>"
-         +"<li class='navigation'><a href='search.jsp'>Rechercher</a></li>"
+         +"<li class='navigation'><a href='../ProjetLO54/sform'>Rechercher</a></li>"
          +"<li class='navigation'><a href='../ProjetLO54/print'>Enregistrer la liste des étudiants inscrits</a></li>"
          +"</ul></div>";
         
